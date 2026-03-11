@@ -1,253 +1,485 @@
-
+<!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Internet Vergleich & Modernisierung Check</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PYUR Tarifübersicht – Umstellung & Wechseltarife</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0c1b33, #13284b);
+      color: #ffffff;
+      line-height: 1.6;
+    }
 
-body{
-font-family: Arial;
-background:#f5f5f5;
-margin:0;
-padding:0;
-}
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
 
-.header{
-background:#00A651;
-color:white;
-padding:25px;
-text-align:center;
-font-size:26px;
-font-weight:bold;
-}
+    .hero {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 32px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
 
-.container{
-max-width:900px;
-margin:auto;
-padding:25px;
-}
+    .badge {
+      display: inline-block;
+      background: #ff7a00;
+      color: #fff;
+      font-weight: bold;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
 
-.card{
-background:white;
-padding:25px;
-border-radius:10px;
-margin-bottom:20px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
+    h1 {
+      font-size: 34px;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
 
-h2{
-color:#00A651;
-}
+    .subtitle {
+      font-size: 18px;
+      color: #d8e3ff;
+      max-width: 850px;
+    }
 
-select,input{
-width:100%;
-padding:12px;
-margin-top:10px;
-margin-bottom:20px;
-border-radius:6px;
-border:1px solid #ccc;
-font-size:16px;
-}
+    .info-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 24px 0 30px;
+    }
 
-button{
-background:#00A651;
-color:white;
-border:none;
-padding:15px;
-width:100%;
-font-size:18px;
-border-radius:6px;
-cursor:pointer;
-}
+    .info-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 18px;
+    }
 
-button:hover{
-background:#008f45;
-}
+    .info-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #ffb066;
+    }
 
-.result{
-font-size:20px;
-text-align:center;
-margin-top:20px;
-}
+    .selection-box {
+      background: #ffffff;
+      color: #13284b;
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
 
-.highlight{
-color:#00A651;
-font-weight:bold;
-font-size:24px;
-}
+    .selection-box h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
 
-.info{
-background:#f0f8f5;
-padding:20px;
-border-radius:8px;
-line-height:1.6;
-}
+    .selection-box p {
+      margin-bottom: 18px;
+      color: #42506d;
+    }
 
-</style>
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    select {
+      width: 100%;
+      max-width: 420px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 2px solid #d8dfea;
+      font-size: 16px;
+      outline: none;
+      background: #fff;
+      color: #13284b;
+    }
+
+    select:focus {
+      border-color: #ff7a00;
+    }
+
+    .tariff-card {
+      background: #ffffff;
+      color: #13284b;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .tariff-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .tariff-name {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .tariff-tag {
+      display: inline-block;
+      background: #eaf2ff;
+      color: #1d4e9e;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .price-box {
+      text-align: right;
+      min-width: 180px;
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: bold;
+      color: #ff7a00;
+      line-height: 1;
+    }
+
+    .price-note {
+      font-size: 14px;
+      color: #5d6b87;
+      margin-top: 6px;
+    }
+
+    .desc {
+      font-size: 17px;
+      color: #31415f;
+      margin-bottom: 22px;
+      max-width: 850px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .detail {
+      background: #f4f7fc;
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid #e5ebf5;
+    }
+
+    .detail-label {
+      font-size: 13px;
+      color: #667592;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .detail-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #13284b;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #fff5eb, #fff0df);
+      border: 1px solid #ffd2a8;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .highlight-box h3 {
+      color: #c95f00;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .highlight-box ul {
+      padding-left: 18px;
+    }
+
+    .highlight-box li {
+      margin-bottom: 8px;
+      color: #603d1b;
+    }
+
+    .note {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 24px;
+      color: #dce6ff;
+    }
+
+    .footer-hint {
+      font-size: 14px;
+      color: #c7d5f5;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .tariff-name {
+        font-size: 24px;
+      }
+
+      .price {
+        font-size: 34px;
+      }
+
+      .price-box {
+        text-align: left;
+      }
+
+      .tariff-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
 
-<div class="header">
-Internet Modernisierung & Tarifvergleich
-</div>
+    <section class="hero">
+      <div class="badge">Offizielle Tarifübersicht / Netzmodernisierung</div>
+      <h1>Umstellung auf zukunftsfähige Anschlusstechnik</h1>
+      <p class="subtitle">
+        Im Rahmen der Netzmodernisierung werden ältere Anschlussarten schrittweise auf moderne Technologien umgestellt.
+        Für bestehende Kunden stehen hierfür passende <strong>Wechseltarife</strong> zur Verfügung. Nachfolgend kann
+        der passende Tarif direkt ausgewählt und angezeigt werden.
+      </p>
 
-<div class="container">
+      <div class="info-box">
+        <div class="info-card">
+          <h3>Warum die Umstellung?</h3>
+          <p>Ältere Infrastrukturen werden sukzessive modernisiert, damit Anschlüsse langfristig stabil, leistungsfähig und zukunftssicher bleiben.</p>
+        </div>
+        <div class="info-card">
+          <h3>Was bedeutet das für Kunden?</h3>
+          <p>Je nach Anschlussart ist ein Tarifwechsel bzw. eine technische Umstellung erforderlich, damit die Versorgung weiterhin sichergestellt bleibt.</p>
+        </div>
+        <div class="info-card">
+          <h3>Welche Tarife sind relevant?</h3>
+          <p>Im Mittelpunkt stehen vor allem die verfügbaren Wechseltarife, die im Rahmen der Umstellung angeboten werden können.</p>
+        </div>
+      </div>
+    </section>
 
-<div class="card info">
+    <section class="selection-box">
+      <h2>Wechseltarif auswählen</h2>
+      <p>Hier kann direkt das passende Produkt ausgewählt werden. Die Tarifdetails werden darunter automatisch angezeigt.</p>
 
-<h2>Netzmodernisierung in Deutschland</h2>
+      <label for="tarifSelect">Produkt / Wechseltarif</label>
+      <select id="tarifSelect" onchange="updateTarif()">
+        <option value="wechsel20">Wechseltarif 20</option>
+        <option value="wechsel50" selected>Wechseltarif 50</option>
+        <option value="wechsel250">Wechseltarif 250</option>
+        <option value="wechsel500">Wechseltarif 500</option>
+        <option value="wechsel1000">Wechseltarif 1000</option>
+      </select>
+    </section>
 
-Viele Haushalte nutzen noch ältere DSL-Technologie über Kupferleitungen.  
-Deutschland stellt jedoch zunehmend auf moderne Netze um.
+    <section class="tariff-card">
+      <div class="tariff-top">
+        <div>
+          <div class="tariff-name" id="tarifName">Wechseltarif 50</div>
+          <div class="tariff-tag" id="tarifTag">Empfohlener Wechseltarif</div>
+        </div>
 
-Neue Technologien wie **DOCSIS Kabelinternet und Glasfaser** bieten:
+        <div class="price-box">
+          <div class="price" id="tarifPrice">29,99 €</div>
+          <div class="price-note" id="tarifPriceNote">pro Monat</div>
+        </div>
+      </div>
 
-• höhere Geschwindigkeiten  
-• stabilere Verbindung  
-• geringere Kosten  
-• bessere Zukunftssicherheit  
+      <p class="desc" id="tarifDesc">
+        Geeignet für Haushalte mit klassischer Internetnutzung, Streaming, Homeoffice und mehreren Geräten gleichzeitig.
+      </p>
 
-Mit diesem Rechner können Sie einfach prüfen,  
-**wie viel Sie aktuell zahlen und wie viel Sie sparen können.**
+      <div class="details-grid">
+        <div class="detail">
+          <div class="detail-label">Download</div>
+          <div class="detail-value" id="tarifDownload">50 Mbit/s</div>
+        </div>
+        <div class="detail">
+          <div class="detail-label">Upload</div>
+          <div class="detail-value" id="tarifUpload">10 Mbit/s</div>
+        </div>
+        <div class="detail">
+          <div class="detail-label">Tarifart</div>
+          <div class="detail-value" id="tarifType">Wechseltarif</div>
+        </div>
+        <div class="detail">
+          <div class="detail-label">Geeignet für</div>
+          <div class="detail-value" id="tarifUse">Alltag & Streaming</div>
+        </div>
+      </div>
 
-</div>
+      <div class="highlight-box">
+        <h3>Ihre Vorteile bei der Umstellung</h3>
+        <ul id="tarifBenefits">
+          <li>Passender Tarif im Rahmen der technischen Umstellung</li>
+          <li>Zukunftsfähiger Anschluss für moderne Nutzung</li>
+          <li>Geeignet für mehrere Geräte im Haushalt</li>
+          <li>Stabile Versorgung und bessere Planbarkeit</li>
+        </ul>
+      </div>
+    </section>
 
+    <section class="note">
+      <strong>Hinweis:</strong> Die dargestellten Produkte dienen als Übersicht im Rahmen einer Anschluss- bzw. Tarifumstellung.
+      Verfügbarkeit, technische Voraussetzungen und konkrete Konditionen können je nach Adresse und Gebäudestruktur abweichen.
+      <div class="footer-hint">
+        Interne Beratungsseite zur verständlichen Darstellung möglicher Wechseloptionen.
+      </div>
+    </section>
 
-<div class="card">
+  </div>
 
-<h2>Ihr aktueller Anbieter</h2>
+  <script>
+    const tarife = {
+      wechsel20: {
+        name: "Wechseltarif 20",
+        tag: "Basis-Wechseltarif",
+        price: "24,99 €",
+        priceNote: "pro Monat",
+        desc: "Der passende Einstiegstarif für einfache Internetnutzung wie Surfen, E-Mails und einzelne Streaming-Anwendungen.",
+        download: "20 Mbit/s",
+        upload: "5 Mbit/s",
+        type: "Wechseltarif",
+        use: "Basisnutzung",
+        benefits: [
+          "Geeignet für grundlegende Internetnutzung",
+          "Passend für kleinere Haushalte",
+          "Solide Lösung im Rahmen der Umstellung",
+          "Einfacher Einstieg in moderne Anschlusstechnik"
+        ]
+      },
+      wechsel50: {
+        name: "Wechseltarif 50",
+        tag: "Empfohlener Wechseltarif",
+        price: "29,99 €",
+        priceNote: "pro Monat",
+        desc: "Geeignet für Haushalte mit klassischer Internetnutzung, Streaming, Homeoffice und mehreren Geräten gleichzeitig.",
+        download: "50 Mbit/s",
+        upload: "10 Mbit/s",
+        type: "Wechseltarif",
+        use: "Alltag & Streaming",
+        benefits: [
+          "Passender Tarif im Rahmen der technischen Umstellung",
+          "Zukunftsfähiger Anschluss für moderne Nutzung",
+          "Geeignet für mehrere Geräte im Haushalt",
+          "Stabile Versorgung und bessere Planbarkeit"
+        ]
+      },
+      wechsel250: {
+        name: "Wechseltarif 250",
+        tag: "Starker Haushaltstarif",
+        price: "34,99 €",
+        priceNote: "pro Monat",
+        desc: "Ideal für anspruchsvollere Nutzung mit mehreren Personen, UHD-Streaming, Homeoffice und höherem Datenbedarf.",
+        download: "250 Mbit/s",
+        upload: "25 Mbit/s",
+        type: "Wechseltarif",
+        use: "Familie & Homeoffice",
+        benefits: [
+          "Sehr gute Leistung für mehrere Nutzer gleichzeitig",
+          "Optimal für Streaming, Gaming und Arbeiten von zuhause",
+          "Spürbar mehr Leistungsreserve im Alltag",
+          "Geeignet für moderne Mediennutzung"
+        ]
+      },
+      wechsel500: {
+        name: "Wechseltarif 500",
+        tag: "Highspeed-Wechseltarif",
+        price: "39,99 €",
+        priceNote: "pro Monat",
+        desc: "Für Haushalte mit hohem Leistungsbedarf, vielen Geräten, intensiver Nutzung und sehr schnellen Downloads.",
+        download: "500 Mbit/s",
+        upload: "50 Mbit/s",
+        type: "Wechseltarif",
+        use: "Vielnutzer & Gaming",
+        benefits: [
+          "Hohe Geschwindigkeit für große Haushalte",
+          "Starke Performance bei paralleler Nutzung",
+          "Ideal für datenintensive Anwendungen",
+          "Mehr Komfort und Geschwindigkeit im Alltag"
+        ]
+      },
+      wechsel1000: {
+        name: "Wechseltarif 1000",
+        tag: "Maximale Leistung",
+        price: "49,99 €",
+        priceNote: "pro Monat",
+        desc: "Das Top-Produkt für maximale Geschwindigkeit, höchste Ansprüche und leistungsintensive Anwendungen im gesamten Haushalt.",
+        download: "1000 Mbit/s",
+        upload: "100 Mbit/s",
+        type: "Wechseltarif",
+        use: "Premium & Maximum",
+        benefits: [
+          "Maximale Surfgeschwindigkeit für höchste Ansprüche",
+          "Optimal für große Datenmengen und viele Geräte",
+          "Top-Leistung für Streaming, Gaming und Homeoffice",
+          "Besonders zukunftssichere Lösung"
+        ]
+      }
+    };
 
-<select id="anbieter">
-<option>Telekom</option>
-<option>Vodafone</option>
-<option>1&1</option>
-<option>O2</option>
-<option>anderer Anbieter</option>
-</select>
+    function updateTarif() {
+      const selected = document.getElementById("tarifSelect").value;
+      const tarif = tarife[selected];
 
-<h2>Ihre aktuelle Geschwindigkeit</h2>
+      document.getElementById("tarifName").textContent = tarif.name;
+      document.getElementById("tarifTag").textContent = tarif.tag;
+      document.getElementById("tarifPrice").textContent = tarif.price;
+      document.getElementById("tarifPriceNote").textContent = tarif.priceNote;
+      document.getElementById("tarifDesc").textContent = tarif.desc;
+      document.getElementById("tarifDownload").textContent = tarif.download;
+      document.getElementById("tarifUpload").textContent = tarif.upload;
+      document.getElementById("tarifType").textContent = tarif.type;
+      document.getElementById("tarifUse").textContent = tarif.use;
 
-<select id="speed">
-<option value="50">50 Mbit</option>
-<option value="100">100 Mbit</option>
-<option value="250">250 Mbit</option>
-<option value="500">500 Mbit</option>
-<option value="1000">1000 Mbit</option>
-</select>
+      const benefitsList = document.getElementById("tarifBenefits");
+      benefitsList.innerHTML = "";
+      tarif.benefits.forEach(vorteil => {
+        const li = document.createElement("li");
+        li.textContent = vorteil;
+        benefitsList.appendChild(li);
+      });
+    }
 
-<h2>Ihre monatlichen Kosten (€)</h2>
-
-<input type="number" id="kosten" placeholder="z.B. 49">
-
-<button onclick="berechnen()">Vergleich berechnen</button>
-
-</div>
-
-
-<div class="card result" id="result" style="display:none;">
-
-<h2>Ihr Vergleich</h2>
-
-<p>Aktuelle Kosten: <span id="aktuell"></span> €</p>
-
-<p>Empfohlener PYUR Tarif</p>
-
-<p class="highlight" id="pyurTarif"></p>
-
-<p>PYUR Preis: <span id="pyurPreis"></span> €</p>
-
-<hr>
-
-<p>Monatliche Ersparnis</p>
-
-<p class="highlight" id="monat"></p>
-
-<p>Jährliche Ersparnis</p>
-
-<p class="highlight" id="jahr"></p>
-
-<p>Ersparnis in 24 Monaten</p>
-
-<p class="highlight" id="zwei"></p>
-
-</div>
-
-
-<div class="card info">
-
-<h2>Vorteile moderner Netze</h2>
-
-✔ stabile Verbindung  
-✔ hohe Geschwindigkeit  
-✔ Streaming ohne Probleme  
-✔ mehrere Geräte gleichzeitig  
-✔ langfristige Technik  
-
-</div>
-
-</div>
-
-<script>
-
-function berechnen(){
-
-let kosten = document.getElementById("kosten").value;
-let speed = document.getElementById("speed").value;
-
-if(kosten==""){
-alert("Bitte Kosten eingeben");
-return;
-}
-
-let pyurPreis = 0;
-let tarif="";
-
-if(speed<=50){
-pyurPreis=19;
-tarif="Pure Surf 50";
-}
-
-else if(speed<=250){
-pyurPreis=23;
-tarif="Pure Speed 250";
-}
-
-else if(speed<=500){
-pyurPreis=29;
-tarif="Pure Speed 500";
-}
-
-else{
-pyurPreis=39;
-tarif="Pure Speed 1000";
-}
-
-let ersparnis = kosten - pyurPreis;
-
-if(ersparnis<0){
-ersparnis=0;
-}
-
-document.getElementById("result").style.display="block";
-
-document.getElementById("aktuell").innerText=kosten;
-
-document.getElementById("pyurPreis").innerText=pyurPreis;
-
-document.getElementById("pyurTarif").innerText=tarif;
-
-document.getElementById("monat").innerText=ersparnis.toFixed(2)+" €";
-
-document.getElementById("jahr").innerText=(ersparnis*12).toFixed(2)+" €";
-
-document.getElementById("zwei").innerText=(ersparnis*24).toFixed(2)+" €";
-
-}
-
-</script>
-
+    updateTarif();
+  </script>
 </body>
 </html>
