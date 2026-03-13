@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PYUR Tarifvergleich – Ist-Zustand / Wechsel</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -17,7 +15,7 @@
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 24px;
     }
@@ -50,7 +48,7 @@
     .subtitle {
       color: #d8e4ff;
       font-size: 17px;
-      max-width: 900px;
+      max-width: 930px;
     }
 
     .grid {
@@ -83,9 +81,7 @@
       margin-bottom: 10px;
     }
 
-    .field {
-      margin-bottom: 16px;
-    }
+    .field { margin-bottom: 16px; }
 
     .field label {
       display: block;
@@ -132,7 +128,7 @@
 
     .result-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 18px;
       margin-top: 10px;
     }
@@ -209,6 +205,30 @@
       color: #14294e;
     }
 
+    .argument-box {
+      margin-top: 18px;
+      background: linear-gradient(135deg, #fff6ea, #fff2df);
+      border: 1px solid #ffd2a0;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .argument-box h3 {
+      margin: 0 0 12px;
+      color: #b85a00;
+      font-size: 20px;
+    }
+
+    .argument-box ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #69431a;
+    }
+
+    .argument-box li {
+      margin-bottom: 8px;
+    }
+
     .bottom-note {
       margin-top: 24px;
       background: rgba(255,255,255,0.07);
@@ -218,19 +238,11 @@
       color: #d9e5ff;
     }
 
-    .green {
-      color: #118a43 !important;
-    }
+    .green { color: #118a43 !important; }
+    .red { color: #c33a2c !important; }
+    .orange { color: #d06b00 !important; }
 
-    .red {
-      color: #c33a2c !important;
-    }
-
-    .orange {
-      color: #d06b00 !important;
-    }
-
-    @media (max-width: 950px) {
+    @media (max-width: 980px) {
       .grid,
       .result-grid,
       .tarif-meta,
@@ -238,13 +250,8 @@
         grid-template-columns: 1fr;
       }
 
-      h1 {
-        font-size: 28px;
-      }
-
-      .result-value {
-        font-size: 25px;
-      }
+      h1 { font-size: 28px; }
+      .result-value { font-size: 25px; }
     }
   </style>
 </head>
@@ -254,7 +261,7 @@
       <div class="badge">Tarifvergleich / Bestandskunde / Wechselberatung</div>
       <h1>Aktuelle Kosten mit neuem PYUR Tarif vergleichen</h1>
       <div class="subtitle">
-        Trage einfach die aktuellen Kundendaten ein, wähle danach den passenden PYUR-Tarif aus und die monatlichen Kosten werden direkt gegenübergestellt.
+        Trage die aktuellen Kundendaten ein, wähle danach den passenden Tarif aus und vergleiche direkt die monatlichen und jährlichen Gesamtkosten.
       </div>
     </div>
 
@@ -299,35 +306,53 @@
         <h2>Neuen PYUR Tarif auswählen</h2>
 
         <div class="field">
-          <label for="tarifSelect">PYUR Tarif</label>
+          <label for="tarifSelect">Tarif / Produkt</label>
           <select id="tarifSelect" onchange="berechnen()">
-            <option value="wechsel20">Wechsel 20</option>
-            <option value="wechsel50">Wechsel 50</option>
-            <option value="wechsel100">Wechsel 100</option>
-            <option value="wechsel250">Wechsel 250</option>
-            <option value="wechsel500">Wechsel 500</option>
-            <option value="wechsel1000">Wechsel 1000</option>
-            <option value="pure20">Pure 20</option>
-            <option value="pure50">Pure 50</option>
-            <option value="pure250">Pure 250</option>
-            <option value="pure500">Pure 500</option>
-            <option value="pure1000">Pure 1000</option>
+            <optgroup label="Wechseltarife">
+              <option value="wechsel20">Wechsel 20</option>
+              <option value="wechsel50" selected>Wechsel 50</option>
+              <option value="wechsel100">Wechsel 100</option>
+              <option value="wechsel200">Wechsel 200</option>
+              <option value="wechsel250">Wechsel 250</option>
+              <option value="wechsel400">Wechsel 400</option>
+              <option value="wechsel500">Wechsel 500</option>
+              <option value="wechsel750">Wechsel 750</option>
+              <option value="wechsel1000">Wechsel 1000</option>
+            </optgroup>
+
+            <optgroup label="Pure Tarife">
+              <option value="pure20">Pure 20</option>
+              <option value="pure50">Pure 50</option>
+              <option value="pure100">Pure 100</option>
+              <option value="pure200">Pure 200</option>
+              <option value="pure250">Pure 250</option>
+              <option value="pure400">Pure 400</option>
+              <option value="pure500">Pure 500</option>
+              <option value="pure750">Pure 750</option>
+              <option value="pure1000">Pure 1000</option>
+            </optgroup>
+
+            <optgroup label="Kombi / Beispielprodukte">
+              <option value="combo50tv">Internet 50 + TV</option>
+              <option value="combo250tv">Internet 250 + TV</option>
+              <option value="combo500tv">Internet 500 + TV</option>
+            </optgroup>
           </select>
         </div>
 
         <div class="checkbox-row">
           <input type="checkbox" id="tvNeuMitnehmen" onchange="berechnen()">
-          <label for="tvNeuMitnehmen" style="margin:0;">TV im neuen Angebot mit einrechnen</label>
+          <label for="tvNeuMitnehmen" style="margin:0;">TV im neuen Angebot zusätzlich mit einrechnen</label>
         </div>
 
-        <div class="field" id="tvNeuWrap">
+        <div class="field">
           <label for="tvNeuPreis">TV neu (€ / Monat)</label>
           <input type="number" id="tvNeuPreis" placeholder="z. B. 10.00" step="0.01" oninput="berechnen()">
         </div>
 
         <div class="tarif-details">
           <div class="section-label">Ausgewähltes Produkt</div>
-          <div class="tarif-name" id="tarifName">Wechsel 20</div>
+          <div class="tarif-name" id="tarifName">Wechsel 50</div>
 
           <div id="tarifBeschreibung" style="color:#42526f; margin-bottom: 12px;">
             Tarifdetails erscheinen hier automatisch.
@@ -352,135 +377,83 @@
             </div>
           </div>
         </div>
+
+        <div class="argument-box">
+          <h3>Warum sich ein Wechsel oft lohnt</h3>
+          <ul id="argumenteListe">
+            <li>Monatliche Kosten und Leistungen können direkt transparent verglichen werden.</li>
+            <li>Höhere Geschwindigkeiten schaffen mehr Reserve für Streaming, Homeoffice und mehrere Geräte.</li>
+            <li>Eine moderne Tarifstruktur sorgt oft für bessere Planbarkeit im Alltag.</li>
+            <li>Internet und TV können übersichtlich in einer Lösung zusammengeführt werden.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <h2>Monatlicher Vergleich</h2>
+      <h2>Kostenvergleich</h2>
 
       <div class="result-grid">
         <div class="result-box">
-          <div class="result-title">Aktuell</div>
+          <div class="result-title">Aktuell pro Monat</div>
           <div class="result-value" id="aktuellGesamt">0,00 €</div>
           <div class="result-sub" id="aktuellInfo">Aktuelle monatliche Gesamtkosten</div>
         </div>
 
         <div class="result-box">
-          <div class="result-title">Neu bei PYUR</div>
+          <div class="result-title">Neu pro Monat</div>
           <div class="result-value" id="neuGesamt">0,00 €</div>
           <div class="result-sub" id="neuInfo">Neuer monatlicher Gesamtpreis</div>
         </div>
 
         <div class="result-box">
-          <div class="result-title">Differenz</div>
-          <div class="result-value orange" id="differenz">0,00 €</div>
-          <div class="result-sub" id="differenzInfo">Vergleich zwischen alt und neu</div>
+          <div class="result-title">Monatlicher Vorteil</div>
+          <div class="result-value orange" id="differenzMonat">0,00 €</div>
+          <div class="result-sub" id="differenzMonatInfo">Vergleich zwischen alt und neu</div>
+        </div>
+
+        <div class="result-box">
+          <div class="result-title">Jährlicher Vorteil</div>
+          <div class="result-value orange" id="differenzJahr">0,00 €</div>
+          <div class="result-sub" id="differenzJahrInfo">Hochgerechnet auf 12 Monate</div>
         </div>
       </div>
     </div>
 
     <div class="bottom-note">
-      <strong>Hinweis:</strong> Preise, Verfügbarkeiten und Tarifbezeichnungen kannst du unten im Code jederzeit anpassen. Dadurch kannst du die Seite schnell für deine echten PYUR-Produkte und Wechseltarife abändern.
+      <strong>Hinweis:</strong> Preise und Tarifnamen kannst du unten im Code frei anpassen. Wenn du mir gleich deine echten PYUR-Produkte und Preise schickst, mache ich dir danach eine exakt passende Version mit deinen echten Tarifen.
     </div>
   </div>
 
   <script>
     const tarife = {
-      wechsel20: {
-        name: "Wechsel 20",
-        preis: 24.99,
-        download: "20 Mbit/s",
-        upload: "5 Mbit/s",
-        art: "Wechseltarif",
-        beschreibung: "Einfacher Wechseltarif für grundlegende Internetnutzung."
-      },
-      wechsel50: {
-        name: "Wechsel 50",
-        preis: 29.99,
-        download: "50 Mbit/s",
-        upload: "10 Mbit/s",
-        art: "Wechseltarif",
-        beschreibung: "Geeignet für Alltag, Streaming und mehrere Geräte."
-      },
-      wechsel100: {
-        name: "Wechsel 100",
-        preis: 32.99,
-        download: "100 Mbit/s",
-        upload: "20 Mbit/s",
-        art: "Wechseltarif",
-        beschreibung: "Gute Lösung für stärkere Nutzung im Alltag."
-      },
-      wechsel250: {
-        name: "Wechsel 250",
-        preis: 34.99,
-        download: "250 Mbit/s",
-        upload: "25 Mbit/s",
-        art: "Wechseltarif",
-        beschreibung: "Starker Tarif für Familien, Homeoffice und Streaming."
-      },
-      wechsel500: {
-        name: "Wechsel 500",
-        preis: 39.99,
-        download: "500 Mbit/s",
-        upload: "50 Mbit/s",
-        art: "Wechseltarif",
-        beschreibung: "Für hohe Anforderungen, viele Geräte und schnelle Downloads."
-      },
-      wechsel1000: {
-        name: "Wechsel 1000",
-        preis: 49.99,
-        download: "1000 Mbit/s",
-        upload: "100 Mbit/s",
-        art: "Wechseltarif",
-        beschreibung: "Maximale Geschwindigkeit für anspruchsvolle Nutzung."
-      },
-      pure20: {
-        name: "Pure 20",
-        preis: 22.99,
-        download: "20 Mbit/s",
-        upload: "5 Mbit/s",
-        art: "Pure Tarif",
-        beschreibung: "Basis-Pure-Tarif für leichte Nutzung."
-      },
-      pure50: {
-        name: "Pure 50",
-        preis: 27.99,
-        download: "50 Mbit/s",
-        upload: "10 Mbit/s",
-        art: "Pure Tarif",
-        beschreibung: "Solider Tarif für klassische Internetnutzung."
-      },
-      pure250: {
-        name: "Pure 250",
-        preis: 32.99,
-        download: "250 Mbit/s",
-        upload: "25 Mbit/s",
-        art: "Pure Tarif",
-        beschreibung: "Schneller Tarif für moderne Haushalte."
-      },
-      pure500: {
-        name: "Pure 500",
-        preis: 37.99,
-        download: "500 Mbit/s",
-        upload: "50 Mbit/s",
-        art: "Pure Tarif",
-        beschreibung: "Highspeed-Tarif für starke Nutzung."
-      },
-      pure1000: {
-        name: "Pure 1000",
-        preis: 47.99,
-        download: "1000 Mbit/s",
-        upload: "100 Mbit/s",
-        art: "Pure Tarif",
-        beschreibung: "Top-Geschwindigkeit für höchste Ansprüche."
-      }
+      wechsel20:  { name:"Wechsel 20",  preis:24.99, download:"20 Mbit/s",   upload:"5 Mbit/s",   art:"Wechseltarif", beschreibung:"Einstiegstarif für grundlegende Internetnutzung.", argumente:["Günstiger Einstieg für einfache Nutzung.","Ideal für Einzelpersonen oder leichte Nutzung.","Übersichtliche Kostenstruktur.","Solider Wechsel für Standardbedarf."] },
+      wechsel50:  { name:"Wechsel 50",  preis:29.99, download:"50 Mbit/s",   upload:"10 Mbit/s",  art:"Wechseltarif", beschreibung:"Geeignet für Alltag, Streaming und mehrere Geräte.", argumente:["Passt gut zu typischer Alltagsnutzung.","Mehr Reserve für Streaming und WLAN-Geräte.","Für viele Haushalte ein sinnvoller Standardtarif.","Leistung und Preis oft in gutem Verhältnis."] },
+      wechsel100: { name:"Wechsel 100", preis:32.99, download:"100 Mbit/s",  upload:"20 Mbit/s",  art:"Wechseltarif", beschreibung:"Mehr Leistung für Homeoffice und stabilere Parallelnutzung.", argumente:["Mehr Leistung für parallele Nutzung.","Gut für Homeoffice, Streaming und Updates.","Stärkerer Tarif ohne direkt in hohe Preisbereiche zu gehen.","Bessere Reserve für zukünftige Nutzung."] },
+      wechsel200: { name:"Wechsel 200", preis:33.99, download:"200 Mbit/s",  upload:"25 Mbit/s",  art:"Wechseltarif", beschreibung:"Starker Tarif für höhere Ansprüche im Alltag.", argumente:["Mehr Komfort bei mehreren Geräten.","Schnellere Downloads und flüssigere Nutzung.","Geeignet für wachsende Haushalte.","Moderne Leistungsklasse für viele Anwendungen."] },
+      wechsel250: { name:"Wechsel 250", preis:34.99, download:"250 Mbit/s",  upload:"25 Mbit/s",  art:"Wechseltarif", beschreibung:"Für Familien, Streaming, Gaming und Homeoffice.", argumente:["Sehr gute Balance aus Preis und Leistung.","Geeignet für mehrere Nutzer gleichzeitig.","Komfortabel für Streaming, Gaming und Arbeiten.","Beliebte Größe für moderne Haushalte."] },
+      wechsel400: { name:"Wechsel 400", preis:37.99, download:"400 Mbit/s",  upload:"40 Mbit/s",  art:"Wechseltarif", beschreibung:"Hohe Leistung für datenintensive Nutzung.", argumente:["Spürbar mehr Leistungsreserve.","Sinnvoll bei vielen verbundenen Geräten.","Gute Option für datenintensive Anwendungen.","Mehr Geschwindigkeit für anspruchsvollere Haushalte."] },
+      wechsel500: { name:"Wechsel 500", preis:39.99, download:"500 Mbit/s",  upload:"50 Mbit/s",  art:"Wechseltarif", beschreibung:"Highspeed-Tarif für intensive Nutzung im Haushalt.", argumente:["Sehr stark für Vielnutzer und große Haushalte.","Komfort bei parallelem Streaming und Downloads.","Mehr Zukunftssicherheit im Tarif.","Leistungsstarke Option für hohe Ansprüche."] },
+      wechsel750: { name:"Wechsel 750", preis:44.99, download:"750 Mbit/s",  upload:"75 Mbit/s",  art:"Wechseltarif", beschreibung:"Sehr hohe Geschwindigkeit für große Datenmengen.", argumente:["Ideal für sehr intensive Nutzung.","Große Reserve für viele Endgeräte.","Starke Performance bei hohem Bedarf.","Premium-Niveau mit viel Leistung."] },
+      wechsel1000:{ name:"Wechsel 1000",preis:49.99, download:"1000 Mbit/s", upload:"100 Mbit/s", art:"Wechseltarif", beschreibung:"Top-Geschwindigkeit für höchste Anforderungen.", argumente:["Maximale Geschwindigkeit im Sortiment.","Für höchste Ansprüche und viele Nutzer.","Sehr hohe Zukunftssicherheit.","Top-Tarif für leistungsintensive Haushalte."] },
+
+      pure20:  { name:"Pure 20",  preis:22.99, download:"20 Mbit/s",   upload:"5 Mbit/s",   art:"Pure Tarif", beschreibung:"Basis-Tarif für leichte Nutzung.", argumente:["Einfacher Starttarif.","Übersichtlicher Monatspreis.","Für Basisnutzung ausreichend.","Gut für geringe Anforderungen."] },
+      pure50:  { name:"Pure 50",  preis:27.99, download:"50 Mbit/s",   upload:"10 Mbit/s",  art:"Pure Tarif", beschreibung:"Solider Tarif für alltägliche Internetnutzung.", argumente:["Klassischer Standardtarif.","Gute Basis für tägliche Nutzung.","Streaming und Surfen problemlos möglich.","Attraktiver Einstieg in moderne Bandbreiten."] },
+      pure100: { name:"Pure 100", preis:30.99, download:"100 Mbit/s",  upload:"20 Mbit/s",  art:"Pure Tarif", beschreibung:"Mehr Geschwindigkeit für stärkere Nutzung.", argumente:["Mehr Reserve als die kleineren Tarife.","Sinnvoll für mehrere Geräte.","Stabilere Nutzung bei höherem Bedarf.","Guter Zwischenschritt zu höheren Bandbreiten."] },
+      pure200: { name:"Pure 200", preis:31.99, download:"200 Mbit/s",  upload:"25 Mbit/s",  art:"Pure Tarif", beschreibung:"Kräftiger Tarif für digitale Alltagsnutzung.", argumente:["Mehr Leistungsreserve im Alltag.","Geeignet für Familien und intensivere Nutzung.","Starkes Preis-Leistungs-Gefühl.","Komfortableres Nutzungserlebnis."] },
+      pure250: { name:"Pure 250", preis:32.99, download:"250 Mbit/s",  upload:"25 Mbit/s",  art:"Pure Tarif", beschreibung:"Schneller Tarif für moderne Haushalte.", argumente:["Beliebte Bandbreite für aktuelle Haushalte.","Mehr Komfort bei gleichzeitiger Nutzung.","Streaming und Arbeiten parallel gut möglich.","Stabile Wahl im mittleren Leistungsbereich."] },
+      pure400: { name:"Pure 400", preis:35.99, download:"400 Mbit/s",  upload:"40 Mbit/s",  art:"Pure Tarif", beschreibung:"Highspeed für höhere Ansprüche.", argumente:["Spürbar schneller im Alltag.","Gut für datenintensive Nutzung.","Mehr Reserve für viele Geräte.","Komfortorientierte Lösung."] },
+      pure500: { name:"Pure 500", preis:37.99, download:"500 Mbit/s",  upload:"50 Mbit/s",  art:"Pure Tarif", beschreibung:"Starker Highspeed-Tarif.", argumente:["Schnelle Downloads und stabile Nutzung.","Sehr gut für parallele Nutzung.","Mehr Zukunftssicherheit.","Leistungsstarke Haushaltslösung."] },
+      pure750: { name:"Pure 750", preis:42.99, download:"750 Mbit/s",  upload:"75 Mbit/s",  art:"Pure Tarif", beschreibung:"Premium-Tarif mit hoher Leistungsreserve.", argumente:["Premium-Leistung für anspruchsvolle Nutzung.","Viel Reserve für große Datenmengen.","Sinnvoll bei hohem Bandbreitenbedarf.","Sehr starke Gesamtleistung."] },
+      pure1000:{ name:"Pure 1000",preis:47.99, download:"1000 Mbit/s", upload:"100 Mbit/s", art:"Pure Tarif", beschreibung:"Maximale Leistung für höchste Ansprüche.", argumente:["Top-Bandbreite im Produktbereich.","Sehr hohe Zukunftssicherheit.","Geeignet für viele Nutzer und Anwendungen.","Maximaler Komfort bei hoher Auslastung."] },
+
+      combo50tv:  { name:"Internet 50 + TV",  preis:39.99, download:"50 Mbit/s",  upload:"10 Mbit/s", art:"Kombiprodukt", beschreibung:"Internet- und TV-Lösung in einem Paket.", argumente:["Internet und TV in einer Übersicht.","Bündelung kann die Verwaltung vereinfachen.","Geeignet für Haushalte mit TV-Nutzung.","Mehr Übersicht bei laufenden Verträgen."] },
+      combo250tv: { name:"Internet 250 + TV", preis:44.99, download:"250 Mbit/s", upload:"25 Mbit/s", art:"Kombiprodukt", beschreibung:"Schnelles Internet kombiniert mit TV.", argumente:["Starker Kombitarif für moderne Haushalte.","Mehr Leistung plus TV in einer Lösung.","Gut für Familien mit höherem Bedarf.","Komfortable Kombination aus Geschwindigkeit und Unterhaltung."] },
+      combo500tv: { name:"Internet 500 + TV", preis:49.99, download:"500 Mbit/s", upload:"50 Mbit/s", art:"Kombiprodukt", beschreibung:"Highspeed und TV in einem Paket.", argumente:["Schnelles Internet und TV gebündelt.","Attraktiv für Vielnutzer mit TV-Bedarf.","Komfortable Paketlösung.","Leistungsstarkes Gesamtangebot."] }
     };
 
     function euro(wert) {
-      return wert.toLocaleString("de-DE", {
-        style: "currency",
-        currency: "EUR"
-      });
+      return wert.toLocaleString("de-DE", { style: "currency", currency: "EUR" });
     }
 
     function holeZahl(id) {
@@ -491,6 +464,16 @@
     function toggleTvFeld() {
       const tvAn = document.getElementById("tvVorhanden").checked;
       document.getElementById("tvPreisWrap").style.display = tvAn ? "block" : "none";
+    }
+
+    function setArgumente(argumente) {
+      const liste = document.getElementById("argumenteListe");
+      liste.innerHTML = "";
+      argumente.forEach(text => {
+        const li = document.createElement("li");
+        li.textContent = text;
+        liste.appendChild(li);
+      });
     }
 
     function berechnen() {
@@ -508,8 +491,10 @@
       const tvNeuPreis = tvNeuAktiv ? holeZahl("tvNeuPreis") : 0;
 
       const aktuell = internetPreis + sonstigePreis + tvAltPreis;
-      const neu = tarif.preis + tvNeuPreis;
-      const diff = neu - aktuell;
+      const neu = tarif.preis + (tvNeuAktiv ? tvNeuPreis : 0);
+
+      const diffMonat = aktuell - neu;
+      const diffJahr = diffMonat * 12;
 
       document.getElementById("tarifName").textContent = tarif.name;
       document.getElementById("tarifPreisAnzeige").textContent = euro(tarif.preis);
@@ -517,6 +502,7 @@
       document.getElementById("tarifUpload").textContent = tarif.upload;
       document.getElementById("tarifArt").textContent = tarif.art;
       document.getElementById("tarifBeschreibung").textContent = tarif.beschreibung;
+      setArgumente(tarif.argumente);
 
       document.getElementById("aktuellGesamt").textContent = euro(aktuell);
       document.getElementById("neuGesamt").textContent = euro(neu);
@@ -527,23 +513,35 @@
       document.getElementById("neuInfo").textContent =
         "Neuer monatlicher Gesamtpreis mit " + tarif.name;
 
-      const diffEl = document.getElementById("differenz");
-      const diffInfoEl = document.getElementById("differenzInfo");
+      const monatEl = document.getElementById("differenzMonat");
+      const monatInfoEl = document.getElementById("differenzMonatInfo");
+      const jahrEl = document.getElementById("differenzJahr");
+      const jahrInfoEl = document.getElementById("differenzJahrInfo");
 
-      diffEl.classList.remove("green", "red", "orange");
+      monatEl.classList.remove("green", "red", "orange");
+      jahrEl.classList.remove("green", "red", "orange");
 
-      if (diff < 0) {
-        diffEl.textContent = euro(Math.abs(diff)) + " günstiger";
-        diffEl.classList.add("green");
-        diffInfoEl.textContent = "Der neue Tarif ist monatlich günstiger";
-      } else if (diff > 0) {
-        diffEl.textContent = euro(diff) + " mehr";
-        diffEl.classList.add("red");
-        diffInfoEl.textContent = "Der neue Tarif ist monatlich teurer";
+      if (diffMonat > 0) {
+        monatEl.textContent = euro(diffMonat) + " weniger";
+        jahrEl.textContent = euro(diffJahr) + " pro Jahr";
+        monatEl.classList.add("green");
+        jahrEl.classList.add("green");
+        monatInfoEl.textContent = "Neuer Tarif ist monatlich günstiger";
+        jahrInfoEl.textContent = "Jährliche Ersparnis gegenüber dem bisherigen Stand";
+      } else if (diffMonat < 0) {
+        monatEl.textContent = euro(Math.abs(diffMonat)) + " mehr";
+        jahrEl.textContent = euro(Math.abs(diffJahr)) + " pro Jahr";
+        monatEl.classList.add("red");
+        jahrEl.classList.add("red");
+        monatInfoEl.textContent = "Neuer Tarif ist monatlich teurer";
+        jahrInfoEl.textContent = "Jährlicher Mehrpreis gegenüber dem bisherigen Stand";
       } else {
-        diffEl.textContent = "0,00 € gleich";
-        diffEl.classList.add("orange");
-        diffInfoEl.textContent = "Beide Varianten liegen auf gleichem Niveau";
+        monatEl.textContent = "0,00 € gleich";
+        jahrEl.textContent = "0,00 € gleich";
+        monatEl.classList.add("orange");
+        jahrEl.classList.add("orange");
+        monatInfoEl.textContent = "Beide Varianten liegen auf gleichem Niveau";
+        jahrInfoEl.textContent = "Auf 12 Monate ergibt sich kein Unterschied";
       }
     }
 
