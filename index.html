@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PŸUR Tarifvergleich – Wechselberatung</title>
+  <title>PŸUR Wechselberatung</title>
   <style>
     :root{
       --pyur-blue:#243c8f;
@@ -24,7 +24,7 @@
 
     body{
       margin:0;
-      font-family:Arial, sans-serif;
+      font-family:Arial,sans-serif;
       color:#fff;
       background:linear-gradient(135deg,var(--pyur-blue) 0%,var(--pyur-blue-2) 55%,var(--pyur-cyan) 100%);
     }
@@ -105,7 +105,7 @@
     }
 
     .result-grid{
-      grid-template-columns:repeat(4,1fr);
+      grid-template-columns:repeat(5,1fr);
     }
 
     .meta-grid{
@@ -176,6 +176,7 @@
       font-size:13px;
       color:#60708d;
       margin-bottom:14px;
+      line-height:1.45;
     }
 
     .group-title{
@@ -222,7 +223,7 @@
     .tarif-btn .sub{
       display:block;
       font-size:13px;
-      opacity:.9;
+      opacity:.92;
       line-height:1.35;
     }
 
@@ -298,6 +299,27 @@
       margin-bottom:8px;
     }
 
+    .pitch-box{
+      margin-top:16px;
+      background:linear-gradient(135deg,#eef8ff,#f7fbff);
+      border:1px solid #cfe6f7;
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .pitch-box h3{
+      margin:0 0 12px;
+      color:var(--pyur-blue);
+      font-size:20px;
+    }
+
+    .pitch-box p{
+      margin:0;
+      color:#3f5678;
+      line-height:1.6;
+      font-size:15px;
+    }
+
     .result-box{
       background:var(--pyur-light);
       border:1px solid #e1e8f2;
@@ -315,7 +337,7 @@
     }
 
     .result-value{
-      font-size:30px;
+      font-size:28px;
       font-weight:700;
       line-height:1.1;
       color:var(--pyur-text);
@@ -376,7 +398,7 @@
       }
 
       h1{font-size:28px}
-      .result-value{font-size:25px}
+      .result-value{font-size:24px}
       .summary-tile .big{font-size:24px}
     }
   </style>
@@ -386,9 +408,9 @@
 
     <div class="hero">
       <div class="badge">PŸUR Tarifvergleich / Wechselberatung</div>
-      <h1>Aktuelle Kosten mit dem passenden PŸUR Tarif vergleichen</h1>
+      <h1>Aktuelle Kosten mit dem passenden PŸUR Wechseltarif vergleichen</h1>
       <div class="subtitle">
-        Aktuellen Stand eintragen, passenden Tarif antippen und direkt die monatlichen und jährlichen Unterschiede sehen.
+        Aktuellen Stand eintragen, passenden Wechseltarif antippen und direkt die monatlichen, jährlichen und 24-Monats-Unterschiede sehen.
       </div>
     </div>
 
@@ -421,7 +443,7 @@
 
           <div class="field">
             <label for="altGeschwindigkeit">Aktuelle Geschwindigkeit</label>
-            <input type="text" id="altGeschwindigkeit" placeholder="z. B. 100 Mbit/s" oninput="berechnen()">
+            <input type="text" id="altGeschwindigkeit" placeholder="z. B. 50 Mbit/s DSL" oninput="berechnen()">
           </div>
         </div>
 
@@ -434,156 +456,75 @@
           <div class="mini-grid">
             <div class="field">
               <label for="tvAltPreis">TV aktuell (€ / Monat)</label>
-              <input type="number" id="tvAltPreis" step="0.01" placeholder="z. B. 10.00" oninput="berechnen()">
+              <input type="number" id="tvAltPreis" step="0.01" placeholder="z. B. 5.00" oninput="berechnen()">
             </div>
 
             <div class="field">
               <label for="tvAltName">TV aktuell</label>
-              <input type="text" id="tvAltName" placeholder="z. B. Basic TV" oninput="berechnen()">
+              <input type="text" id="tvAltName" placeholder="z. B. Kabel TV" oninput="berechnen()">
             </div>
           </div>
         </div>
 
         <div class="field">
           <label for="notiz">Notiz / aktueller Tarif</label>
-          <input type="text" id="notiz" placeholder="z. B. 100er DSL, Router-Miete, TV optional" oninput="berechnen()">
+          <input type="text" id="notiz" placeholder="z. B. DSL-Vertrag, Router-Miete, TV optional" oninput="berechnen()">
         </div>
       </div>
 
       <div class="card">
-        <h2>Neuen PŸUR Tarif auswählen</h2>
+        <h2>Neuen PŸUR Wechseltarif auswählen</h2>
         <div class="section-note">
-          Große Buttons für iPad-Nutzung beim Kunden. Preise aus deiner Wave-1-Vertriebsinfo.  [oai_citation:2‡2026_02_24_V-Info_Kampagne-Wave1-2026.pdf](sediment://file_00000000c49c7246916739f1fee1bd40)
+          Fokus auf die gängigsten Wechsler-Produkte. Der Wechselgrund ist sachlich so formuliert, dass er auf Netzmodernisierung und Umstellung auf die vorhandene Multimedia-Dose / Koax-Infrastruktur abstellt. Die Bundesnetzagentur beschreibt dafür einen schrittweisen Technologiewechsel von Kupfer auf zukunftsfähige Netze; einen bundesweiten DSL-Abschalttermin nennt sie nicht.  [oai_citation:2‡Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/GlasfaserStattKupfer/start.html?utm_source=chatgpt.com)
         </div>
 
-        <div class="group-title">Internet Single</div>
+        <div class="group-title">Wechsler-Produkte</div>
         <div class="btn-grid">
-          <button class="tarif-btn active" data-tarif="pure50" onclick="selectTarif('pure50')">
-            <span class="name">Pure Surf 50</span>
-            <span class="sub">50 / 5 Mbit/s · Internet Single</span>
-            <span class="price">19,00 €</span>
+          <button class="tarif-btn active" data-tarif="kombi500tv" onclick="selectTarif('kombi500tv')">
+            <span class="name">Kombi 500 PŸUR TV Wechsler</span>
+            <span class="sub">500 Mbit/s · TV inklusive</span>
+            <span class="price">44,99 €</span>
           </button>
 
-          <button class="tarif-btn" data-tarif="pure250" onclick="selectTarif('pure250')">
-            <span class="name">Pure Speed 250</span>
-            <span class="sub">250 / 25 Mbit/s · Internet Single</span>
-            <span class="price">23,00 €</span>
+          <button class="tarif-btn" data-tarif="kombi1000tv" onclick="selectTarif('kombi1000tv')">
+            <span class="name">Kombi 1000 PŸUR TV Wechsler</span>
+            <span class="sub">1000 Mbit/s · TV inklusive</span>
+            <span class="price">49,99 €</span>
           </button>
 
-          <button class="tarif-btn" data-tarif="pure500" onclick="selectTarif('pure500')">
-            <span class="name">Pure Speed 500</span>
-            <span class="sub">500 / 50 Mbit/s · Internet Single</span>
-            <span class="price">29,00 €</span>
+          <button class="tarif-btn" data-tarif="kabeltv" onclick="selectTarif('kabeltv')">
+            <span class="name">Kabel.TV</span>
+            <span class="sub">TV-Grundprodukt</span>
+            <span class="price">5,00 €</span>
           </button>
 
-          <button class="tarif-btn" data-tarif="pure1000" onclick="selectTarif('pure1000')">
-            <span class="name">Pure Speed 1000</span>
-            <span class="sub">1000 / 50 Mbit/s · Internet Single</span>
-            <span class="price">39,00 €</span>
+          <button class="tarif-btn" data-tarif="ue60" onclick="selectTarif('ue60')">
+            <span class="name">Surf &amp; Phone 50 Ü60</span>
+            <span class="sub">50 Mbit/s · für ältere Kunden</span>
+            <span class="price">28,00 €</span>
           </button>
-        </div>
-
-        <div class="group-title">Kombi Light</div>
-        <div class="btn-grid">
-          <button class="tarif-btn" data-tarif="kombiLight500" onclick="selectTarif('kombiLight500')">
-            <span class="name">Kombi Light 500</span>
-            <span class="sub">500 / 50 Mbit/s · Kombi Light</span>
-            <span class="price">34,00 €</span>
-          </button>
-
-          <button class="tarif-btn" data-tarif="kombiLight1000" onclick="selectTarif('kombiLight1000')">
-            <span class="name">Kombi Light 1000</span>
-            <span class="sub">1000 / 50 Mbit/s · Kombi Light</span>
-            <span class="price">44,00 €</span>
-          </button>
-        </div>
-
-        <div class="group-title">Kombi mit PŸUR TV</div>
-        <div class="btn-grid">
-          <button class="tarif-btn" data-tarif="kombi250" onclick="selectTarif('kombi250')">
-            <span class="name">Kombi 250</span>
-            <span class="sub">250 / 25 Mbit/s · TV inklusive</span>
-            <span class="price">35,00 €</span>
-          </button>
-
-          <button class="tarif-btn" data-tarif="kombi500" onclick="selectTarif('kombi500')">
-            <span class="name">Kombi 500</span>
-            <span class="sub">500 / 50 Mbit/s · TV inklusive</span>
-            <span class="price">40,00 €</span>
-          </button>
-
-          <button class="tarif-btn" data-tarif="kombi1000" onclick="selectTarif('kombi1000')">
-            <span class="name">Kombi 1000</span>
-            <span class="sub">1000 / 50 Mbit/s · TV inklusive</span>
-            <span class="price">50,00 €</span>
-          </button>
-        </div>
-
-        <div class="group-title">Zusatzoptionen</div>
-        <div class="mini-grid">
-          <div class="field">
-            <label for="hardwareSelect">Hardware neu</label>
-            <select id="hardwareSelect" onchange="berechnen()">
-              <option value="none">Keine Zusatzhardware</option>
-              <option value="wlanbox">WLAN-Kabelbox 3,99 €</option>
-              <option value="fritz">FRITZ!Box 4,99 €</option>
-              <option value="repeater">FRITZ!Repeater 2,00 €</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="telefonieSelect">Telefonie-Option</label>
-            <select id="telefonieSelect" onchange="berechnen()">
-              <option value="none">Keine Zusatzoption</option>
-              <option value="festnetz">Deutschland Festnetz Flat 2,99 €</option>
-              <option value="mobile">Deutschland Mobile Flat 4,99 €</option>
-              <option value="allnetInternetSingle">International Allnet Flat 24,99 €</option>
-              <option value="allnetKombi">International Allnet Flat 19,99 €</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="checkbox-row">
-          <input type="checkbox" id="tvNeuExtraAktiv" onchange="toggleTvNeu(); berechnen();">
-          <label for="tvNeuExtraAktiv" style="margin:0;">Zusätzliche TV-Option separat einrechnen</label>
-        </div>
-
-        <div id="tvNeuWrap" style="display:none;">
-          <div class="field">
-            <label for="tvNeuSelect">TV-Zusatzoption</label>
-            <select id="tvNeuSelect" onchange="berechnen()">
-              <option value="none">Keine Zusatzoption</option>
-              <option value="hdtv">HDTV 5,00 €</option>
-              <option value="premiumLight">PremiumTV Light 3,00 €</option>
-              <option value="premiumStart">PremiumTV Start 5,00 €</option>
-              <option value="premiumPlus">PremiumTV Plus 15,00 €</option>
-              <option value="unterwegs">Unterwegs TV 1,99 €</option>
-              <option value="tvbox">PŸUR TV Box 4,99 €</option>
-              <option value="soundbox">Video Sound Box 6,99 €</option>
-            </select>
-          </div>
         </div>
 
         <div class="tarif-box">
-          <div class="tarif-name" id="tarifName">Pure Surf 50</div>
+          <div class="tarif-name" id="tarifName">Kombi 500 PŸUR TV Wechsler</div>
           <div class="tarif-desc" id="tarifBeschreibung">Tarifdetails erscheinen hier automatisch.</div>
 
           <div class="meta-grid">
             <div class="meta-card">
-              <div class="meta-label">Aktionspreis</div>
-              <div class="meta-value" id="tarifPreis">19,00 €</div>
-            </div>
-            <div class="meta-card">
-              <div class="meta-label">Listenpreis</div>
-              <div class="meta-value" id="tarifListenpreis">34,99 €</div>
+              <div class="meta-label">Monatspreis</div>
+              <div class="meta-value" id="tarifPreis">44,99 €</div>
             </div>
             <div class="meta-card">
               <div class="meta-label">Download</div>
-              <div class="meta-value" id="tarifDownload">50 Mbit/s</div>
+              <div class="meta-value" id="tarifDownload">500 Mbit/s</div>
             </div>
             <div class="meta-card">
               <div class="meta-label">Upload</div>
-              <div class="meta-value" id="tarifUpload">5 Mbit/s</div>
+              <div class="meta-value" id="tarifUpload">50 Mbit/s</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Tarifart</div>
+              <div class="meta-value" id="tarifArt">Wechseltarif</div>
             </div>
           </div>
         </div>
@@ -591,6 +532,13 @@
         <div class="argument-box">
           <h3>Vorteile auf einen Blick</h3>
           <ul id="argumenteListe"></ul>
+        </div>
+
+        <div class="pitch-box">
+          <h3>Wechselgrund / Gesprächsleitfaden</h3>
+          <p id="pitchText">
+            Wir stellen den Anschluss auf die im Gebäude vorhandene Multimedia-Dose um. Das ist für viele Haushalte der sinnvollere Weg, weil die Versorgung damit direkt über die vorhandene Hausinfrastruktur läuft. Gleichzeitig entwickelt sich der Markt weg von klassischen Kupfer-/DSL-Lösungen hin zu moderneren Netzen. Wer heute sauber auf die Grundversorgung im Gebäude umstellt, hat oft eine planbarere und leistungsstärkere Lösung für Internet und TV.  [oai_citation:3‡Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/GlasfaserStattKupfer/start.html?utm_source=chatgpt.com)
+          </p>
         </div>
       </div>
     </div>
@@ -622,6 +570,12 @@
           <div class="result-value neutral" id="differenzJahr">0,00 €</div>
           <div class="result-sub" id="differenzJahrInfo">Hochgerechnet auf 12 Monate</div>
         </div>
+
+        <div class="result-box">
+          <div class="result-title">24 Monate Unterschied</div>
+          <div class="result-value neutral" id="differenz24">0,00 €</div>
+          <div class="result-sub" id="differenz24Info">Vertragslaufzeit 24 Monate</div>
+        </div>
       </div>
 
       <div class="summary-strip">
@@ -641,175 +595,74 @@
     </div>
 
     <div class="foot-note">
-      Die eingebauten Produktpreise orientieren sich an deiner hochgeladenen Wave-1-Info, einschließlich Internet Single, Kombi Light, Kombi und Zusatzoptionen wie WLAN-Kabelbox, FRITZ!Box, HDTV und weiteren Features.  [oai_citation:3‡2026_02_24_V-Info_Kampagne-Wave1-2026.pdf](sediment://file_00000000c49c7246916739f1fee1bd40)  [oai_citation:4‡2026_02_24_V-Info_Kampagne-Wave1-2026.pdf](sediment://file_00000000c49c7246916739f1fee1bd40)
+      Diese Version nutzt nur deine genannten Hauptprodukte. Den Wechseltext habe ich so angepasst, dass er stark verkauft, aber keine pauschal falsche Behauptung zu einem festen DSL-Abschalttermin enthält. Offiziell geht es um einen schrittweisen Technologiewechsel.  [oai_citation:4‡Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/GlasfaserStattKupfer/start.html?utm_source=chatgpt.com)
     </div>
   </div>
 
   <script>
-    let selectedTarif = "pure50";
+    let selectedTarif = "kombi500tv";
 
     const tarife = {
-      pure50: {
-        name: "Pure Surf 50",
-        preis: 19.00,
-        listenpreis: 34.99,
+      kombi500tv: {
+        name: "Kombi 500 PŸUR TV Wechsler",
+        preis: 44.99,
+        download: 500,
+        upload: 50,
+        art: "Wechseltarif",
+        beschreibung: "Starker Wechseltarif mit PŸUR TV für Haushalte mit höherem Bedarf.",
+        argumente: [
+          "Internet und TV in einer übersichtlichen Lösung.",
+          "Hohe Bandbreite für Streaming, Homeoffice und viele Geräte.",
+          "Sinnvoll für Haushalte, die direkt auf eine starke Komplettlösung wechseln möchten.",
+          "Passt gut, wenn bereits TV-Nutzung eine Rolle spielt."
+        ],
+        pitch: "Wir ziehen den Anschluss auf die vorhandene Multimedia-Dose im Gebäude. Damit läuft die Versorgung direkt über die hausinterne Kabel-/Koax-Infrastruktur. Das ist oft der sauberere Weg, wenn man Internet und TV gebündelt auf einer modernen Grundversorgung abbilden möchte."
+      },
+      kombi1000tv: {
+        name: "Kombi 1000 PŸUR TV Wechsler",
+        preis: 49.99,
+        download: 1000,
+        upload: 50,
+        art: "Wechseltarif",
+        beschreibung: "Premium-Wechseltarif mit PŸUR TV und maximaler Geschwindigkeit.",
+        argumente: [
+          "Sehr hohe Geschwindigkeit für anspruchsvolle Haushalte.",
+          "TV bereits im Produkt enthalten.",
+          "Große Leistungsreserve für viele Geräte gleichzeitig.",
+          "Stark für Kunden, die direkt auf die größte Lösung gehen möchten."
+        ],
+        pitch: "Die Umstellung auf die Multimedia-Dose bringt den Kunden auf die im Gebäude vorhandene Grundversorgung. Gerade bei höherem Nutzungsanspruch ist das ein sinnvoller Schritt, um den Anschluss zukunftsorientiert und leistungsstark aufzustellen."
+      },
+      kabeltv: {
+        name: "Kabel.TV",
+        preis: 5.00,
+        download: 0,
+        upload: 0,
+        art: "TV Produkt",
+        beschreibung: "TV-Grundprodukt über den vorhandenen Kabelanschluss.",
+        argumente: [
+          "Einfaches TV-Produkt für die Grundversorgung.",
+          "Sinnvoll, wenn beim Kunden vor allem TV im Fokus steht.",
+          "Übersichtliche monatliche Kosten.",
+          "Kann gut als Einstieg oder Ergänzung genutzt werden."
+        ],
+        pitch: "Wenn im Gebäude bereits die Multimedia-Dose vorhanden ist, lässt sich TV darüber direkt sauber abbilden. Für viele Kunden ist das die einfachste und nachvollziehbarste Lösung für die TV-Grundversorgung."
+      },
+      ue60: {
+        name: "Surf & Phone 50 Ü60",
+        preis: 28.00,
         download: 50,
         upload: 5,
-        art: "Internet Single",
-        beschreibung: "Internet Single Tarif mit starkem Einstiegspreis.",
+        art: "Wechseltarif Ü60",
+        beschreibung: "Gängiger Tarif für ältere Kunden mit Internet und Telefonie.",
         argumente: [
-          "Günstiger monatlicher Einstieg.",
-          "Klarer Tarif für einfache bis normale Alltagsnutzung.",
-          "Übersichtlicher Vergleich zum bisherigen Anbieter.",
-          "Gut für Kunden, die auf Preis und Stabilität schauen."
-        ]
-      },
-      pure250: {
-        name: "Pure Speed 250",
-        preis: 23.00,
-        listenpreis: 39.99,
-        download: 250,
-        upload: 25,
-        art: "Internet Single",
-        beschreibung: "Schneller Single-Tarif für Streaming, Homeoffice und mehrere Geräte.",
-        argumente: [
-          "Mehr Leistungsreserve im Alltag.",
-          "Gut für Streaming, Homeoffice und parallele Nutzung.",
-          "Starkes Verhältnis aus Preis und Geschwindigkeit.",
-          "Für viele Haushalte eine komfortable Größe."
-        ]
-      },
-      pure500: {
-        name: "Pure Speed 500",
-        preis: 29.00,
-        listenpreis: 44.99,
-        download: 500,
-        upload: 50,
-        art: "Internet Single",
-        beschreibung: "Highspeed-Tarif für hohe Ansprüche.",
-        argumente: [
-          "Sehr starke Bandbreite für moderne Haushalte.",
-          "Komfort bei vielen Geräten gleichzeitig.",
-          "Gute Lösung für hohe Ansprüche.",
-          "Attraktiv bei Fokus auf Zukunftssicherheit."
-        ]
-      },
-      pure1000: {
-        name: "Pure Speed 1000",
-        preis: 39.00,
-        listenpreis: 49.99,
-        download: 1000,
-        upload: 50,
-        art: "Internet Single",
-        beschreibung: "Top-Speed für höchste Ansprüche.",
-        argumente: [
-          "Maximale Geschwindigkeit im Portfolio.",
-          "Sehr hohe Leistungsreserve für viele Nutzer.",
-          "Starker Tarif für Premium-Kunden.",
-          "Top-Lösung für maximale Bandbreite."
-        ]
-      },
-      kombiLight500: {
-        name: "Kombi Light 500",
-        preis: 34.00,
-        listenpreis: 49.99,
-        download: 500,
-        upload: 50,
-        art: "Kombi Light",
-        beschreibung: "Internet + Festnetz + Basis TV.",
-        argumente: [
-          "Mehr Leistung plus TV in einer Struktur.",
-          "Übersichtlich für Kunden mit TV-Bedarf.",
-          "Gute Kombination aus Geschwindigkeit und Zusatznutzen.",
-          "Interessant für Haushalte, die bündeln möchten."
-        ]
-      },
-      kombiLight1000: {
-        name: "Kombi Light 1000",
-        preis: 44.00,
-        listenpreis: 54.99,
-        download: 1000,
-        upload: 50,
-        art: "Kombi Light",
-        beschreibung: "Sehr starke Kombi-Light-Lösung mit hoher Bandbreite.",
-        argumente: [
-          "Sehr hohe Geschwindigkeit plus TV-Grundleistung.",
-          "Für Haushalte mit höherem Komfortanspruch.",
-          "Kombiniert Internet und TV übersichtlich.",
-          "Stark, wenn direkt eine große Komplettlösung gewünscht ist."
-        ]
-      },
-      kombi250: {
-        name: "Kombi 250",
-        preis: 35.00,
-        listenpreis: 49.99,
-        download: 250,
-        upload: 25,
-        art: "Kombi mit PŸUR TV",
-        beschreibung: "Internet + PŸUR TV HD + App + Box/Sound Box.",
-        argumente: [
-          "TV bereits sauber integriert.",
-          "Guter Einstieg in die Kombi-Welt.",
-          "Interessant für Kunden mit laufender TV-Nutzung.",
-          "Übersichtlich statt mehrerer Einzelverträge."
-        ]
-      },
-      kombi500: {
-        name: "Kombi 500",
-        preis: 40.00,
-        listenpreis: 54.99,
-        download: 500,
-        upload: 50,
-        art: "Kombi mit PŸUR TV",
-        beschreibung: "Starke Internet- und TV-Kombination.",
-        argumente: [
-          "Hohe Geschwindigkeit plus TV-Leistungen.",
-          "Attraktiv für Familien und Vielnutzer.",
-          "Gute Kombination aus Komfort und Bandbreite.",
-          "Starkes Gesamtpaket für TV und Internet."
-        ]
-      },
-      kombi1000: {
-        name: "Kombi 1000",
-        preis: 50.00,
-        listenpreis: 59.99,
-        download: 1000,
-        upload: 50,
-        art: "Kombi mit PŸUR TV",
-        beschreibung: "Premium-Kombi mit maximaler Bandbreite.",
-        argumente: [
-          "Sehr hohe Leistung plus TV-Komfort.",
-          "Premium-Lösung für anspruchsvolle Haushalte.",
-          "Geeignet für viele Geräte gleichzeitig.",
-          "Top-Paket für Kunden mit Maximum-Anspruch."
-        ]
+          "Übersichtlicher Tarif für alltägliche Nutzung.",
+          "Gut geeignet für ältere Kunden, die es einfach und planbar möchten.",
+          "Telefonie und Internet klar strukturiert.",
+          "Passt gut, wenn keine extrem hohe Geschwindigkeit gebraucht wird."
+        ],
+        pitch: "Gerade für ältere Kunden ist eine einfache, stabile und gut verständliche Lösung wichtig. Über die vorhandene Multimedia-Dose lässt sich der Anschluss häufig unkompliziert auf eine planbare Versorgung umstellen."
       }
-    };
-
-    const hardware = {
-      none: { name: "Keine Zusatzhardware", preis: 0 },
-      wlanbox: { name: "WLAN-Kabelbox", preis: 3.99 },
-      fritz: { name: "FRITZ!Box", preis: 4.99 },
-      repeater: { name: "FRITZ!Repeater", preis: 2.00 }
-    };
-
-    const telefonie = {
-      none: { name: "Keine Zusatzoption", preis: 0 },
-      festnetz: { name: "Deutschland Festnetz Flat", preis: 2.99 },
-      mobile: { name: "Deutschland Mobile Flat", preis: 4.99 },
-      allnetInternetSingle: { name: "International Allnet Flat", preis: 24.99 },
-      allnetKombi: { name: "International Allnet Flat", preis: 19.99 }
-    };
-
-    const tvExtras = {
-      none: { name: "Keine Zusatzoption", preis: 0 },
-      hdtv: { name: "HDTV", preis: 5.00 },
-      premiumLight: { name: "PremiumTV Light", preis: 3.00 },
-      premiumStart: { name: "PremiumTV Start", preis: 5.00 },
-      premiumPlus: { name: "PremiumTV Plus", preis: 15.00 },
-      unterwegs: { name: "Unterwegs TV", preis: 1.99 },
-      tvbox: { name: "PŸUR TV Box", preis: 4.99 },
-      soundbox: { name: "Video Sound Box", preis: 6.99 }
     };
 
     function euro(wert) {
@@ -824,11 +677,6 @@
     function toggleTvAlt() {
       document.getElementById("tvAltWrap").style.display =
         document.getElementById("tvAltAktiv").checked ? "block" : "none";
-    }
-
-    function toggleTvNeu() {
-      document.getElementById("tvNeuWrap").style.display =
-        document.getElementById("tvNeuExtraAktiv").checked ? "block" : "none";
     }
 
     function setArgumente(arr) {
@@ -853,82 +701,83 @@
       const anbieter = document.getElementById("anbieter").value || "Aktueller Anbieter";
       const tarif = tarife[selectedTarif];
 
-      const hardwareKey = document.getElementById("hardwareSelect").value;
-      const hardwareOpt = hardware[hardwareKey];
-
-      const telKey = document.getElementById("telefonieSelect").value;
-      const telOpt = telefonie[telKey];
-
-      const tvNeuAktiv = document.getElementById("tvNeuExtraAktiv").checked;
-      const tvNeuKey = document.getElementById("tvNeuSelect").value;
-      const tvNeuOpt = tvExtras[tvNeuKey];
-
       const altInternet = num("internetPreis");
       const altRouter = num("routerPreis");
       const altSonstige = num("sonstigePreis");
       const altTv = document.getElementById("tvAltAktiv").checked ? num("tvAltPreis") : 0;
 
       const aktuell = altInternet + altRouter + altSonstige + altTv;
-      const neu = tarif.preis + hardwareOpt.preis + telOpt.preis + (tvNeuAktiv ? tvNeuOpt.preis : 0);
+      const neu = tarif.preis;
 
       const diffMonat = aktuell - neu;
       const diffJahr = diffMonat * 12;
+      const diff24 = diffMonat * 24;
 
       document.getElementById("tarifName").textContent = tarif.name;
-      document.getElementById("tarifBeschreibung").textContent = tarif.beschreibung + " (" + tarif.art + ")";
+      document.getElementById("tarifBeschreibung").textContent = tarif.beschreibung;
       document.getElementById("tarifPreis").textContent = euro(tarif.preis);
-      document.getElementById("tarifListenpreis").textContent = euro(tarif.listenpreis);
-      document.getElementById("tarifDownload").textContent = tarif.download + " Mbit/s";
-      document.getElementById("tarifUpload").textContent = tarif.upload + " Mbit/s";
+      document.getElementById("tarifDownload").textContent = tarif.download > 0 ? tarif.download + " Mbit/s" : "–";
+      document.getElementById("tarifUpload").textContent = tarif.upload > 0 ? tarif.upload + " Mbit/s" : "–";
+      document.getElementById("tarifArt").textContent = tarif.art;
+      document.getElementById("pitchText").textContent = tarif.pitch;
       setArgumente(tarif.argumente);
 
       document.getElementById("aktuellGesamt").textContent = euro(aktuell);
       document.getElementById("neuGesamt").textContent = euro(neu);
 
       document.getElementById("aktuellInfo").textContent = "Aktuelle monatliche Gesamtkosten bei " + anbieter;
-      document.getElementById("neuInfo").textContent =
-        tarif.name + " + " + hardwareOpt.name +
-        (telOpt.preis > 0 ? " + " + telOpt.name : "") +
-        (tvNeuAktiv && tvNeuOpt.preis > 0 ? " + " + tvNeuOpt.name : "");
+      document.getElementById("neuInfo").textContent = "Neuer monatlicher Gesamtpreis mit " + tarif.name;
 
       const monatEl = document.getElementById("differenzMonat");
       const jahrEl = document.getElementById("differenzJahr");
+      const d24El = document.getElementById("differenz24");
+
       const monatInfo = document.getElementById("differenzMonatInfo");
       const jahrInfo = document.getElementById("differenzJahrInfo");
+      const d24Info = document.getElementById("differenz24Info");
 
       monatEl.className = "result-value neutral";
       jahrEl.className = "result-value neutral";
+      d24El.className = "result-value neutral";
 
       if (diffMonat > 0) {
         monatEl.textContent = euro(diffMonat) + " weniger";
         jahrEl.textContent = euro(diffJahr) + " pro Jahr";
+        d24El.textContent = euro(diff24) + " in 24 Mon.";
         monatEl.className = "result-value good";
         jahrEl.className = "result-value good";
+        d24El.className = "result-value good";
         monatInfo.textContent = "Neuer Tarif ist monatlich günstiger";
-        jahrInfo.textContent = "Jährliche Ersparnis gegenüber dem bisherigen Stand";
+        jahrInfo.textContent = "Jährliche Ersparnis";
+        d24Info.textContent = "Ersparnis über 24 Monate";
       } else if (diffMonat < 0) {
         monatEl.textContent = euro(Math.abs(diffMonat)) + " mehr";
         jahrEl.textContent = euro(Math.abs(diffJahr)) + " pro Jahr";
+        d24El.textContent = euro(Math.abs(diff24)) + " in 24 Mon.";
         monatEl.className = "result-value bad";
         jahrEl.className = "result-value bad";
+        d24El.className = "result-value bad";
         monatInfo.textContent = "Neuer Tarif ist monatlich teurer";
-        jahrInfo.textContent = "Jährlicher Mehrpreis gegenüber dem bisherigen Stand";
+        jahrInfo.textContent = "Mehrpreis pro Jahr";
+        d24Info.textContent = "Mehrpreis über 24 Monate";
       } else {
         monatEl.textContent = "0,00 € gleich";
         jahrEl.textContent = "0,00 € gleich";
+        d24El.textContent = "0,00 € gleich";
         monatInfo.textContent = "Beide Varianten liegen gleich";
-        jahrInfo.textContent = "Auf 12 Monate kein Unterschied";
+        jahrInfo.textContent = "Kein Unterschied";
+        d24Info.textContent = "Kein Unterschied über 24 Monate";
       }
 
       const altSpeed = document.getElementById("altGeschwindigkeit").value || "unbekannt";
       document.getElementById("summaryAlt").textContent = anbieter;
       document.getElementById("summaryNeu").textContent = tarif.name;
-      document.getElementById("summarySpeed").textContent = altSpeed + " → " + tarif.download + " Mbit/s";
+      document.getElementById("summarySpeed").textContent =
+        tarif.download > 0 ? altSpeed + " → " + tarif.download + " Mbit/s" : altSpeed + " → TV";
     }
 
     toggleTvAlt();
-    toggleTvNeu();
-    selectTarif("pure50");
+    selectTarif("kombi500tv");
   </script>
 </body>
 </html>
