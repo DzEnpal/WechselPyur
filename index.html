@@ -3,269 +3,396 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PYUR Tarifvergleich – Ist-Zustand / Wechsel</title>
+  <title>PŸUR Tarifvergleich – Wechselberatung</title>
   <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0b1930, #14294e);
-      color: #fff;
+    :root{
+      --pyur-blue:#243c8f;
+      --pyur-blue-2:#3157b7;
+      --pyur-cyan:#2bb9e8;
+      --pyur-green:#9ccf10;
+      --pyur-pink:#e61e5c;
+      --pyur-white:#ffffff;
+      --pyur-light:#f4f7fb;
+      --pyur-border:#dce3ef;
+      --pyur-text:#20304d;
+      --good:#148546;
+      --bad:#c63a2f;
+      --neutral:#c97800;
     }
 
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 24px;
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:#fff;
+      background:linear-gradient(135deg,var(--pyur-blue) 0%,var(--pyur-blue-2) 55%,var(--pyur-cyan) 100%);
     }
 
-    .hero {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px;
-      padding: 28px;
-      margin-bottom: 24px;
+    .container{
+      max-width:1380px;
+      margin:0 auto;
+      padding:20px;
     }
 
-    .badge {
-      display: inline-block;
-      background: #ff7a00;
-      color: #fff;
-      font-size: 13px;
-      font-weight: bold;
-      padding: 8px 14px;
-      border-radius: 999px;
-      margin-bottom: 16px;
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.08));
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:24px;
+      padding:28px;
+      margin-bottom:22px;
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
     }
 
-    h1 {
-      margin: 0 0 10px;
-      font-size: 34px;
-      line-height: 1.2;
+    .hero:after{
+      content:"";
+      position:absolute;
+      right:-40px;
+      bottom:-40px;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(156,207,16,.35) 0%, rgba(156,207,16,.06) 65%, transparent 72%);
+      pointer-events:none;
     }
 
-    .subtitle {
-      color: #d8e4ff;
-      font-size: 17px;
-      max-width: 930px;
+    .badge{
+      display:inline-block;
+      background:var(--pyur-pink);
+      color:#fff;
+      font-size:13px;
+      font-weight:700;
+      padding:8px 14px;
+      border-radius:999px;
+      margin-bottom:14px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      margin-bottom: 24px;
+    h1{
+      margin:0 0 10px;
+      font-size:34px;
+      line-height:1.15;
     }
 
-    .card {
-      background: #fff;
-      color: #14294e;
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    .subtitle{
+      color:#e8f1ff;
+      font-size:17px;
+      max-width:980px;
     }
 
-    .card h2 {
-      margin-top: 0;
-      margin-bottom: 18px;
-      font-size: 26px;
+    .top-grid,
+    .result-grid,
+    .meta-grid,
+    .mini-grid,
+    .btn-grid,
+    .summary-strip{
+      display:grid;
+      gap:18px;
     }
 
-    .section-label {
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #6a7892;
-      margin-bottom: 10px;
+    .top-grid{
+      grid-template-columns:1fr 1.15fr;
+      margin-bottom:22px;
     }
 
-    .field { margin-bottom: 16px; }
+    .mini-grid{
+      grid-template-columns:1fr 1fr;
+    }
 
-    .field label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 8px;
-      font-size: 15px;
+    .btn-grid{
+      grid-template-columns:repeat(2,1fr);
+    }
+
+    .result-grid{
+      grid-template-columns:repeat(4,1fr);
+    }
+
+    .meta-grid{
+      grid-template-columns:repeat(4,1fr);
+    }
+
+    .summary-strip{
+      grid-template-columns:repeat(3,1fr);
+      margin-top:20px;
+    }
+
+    .card{
+      background:#fff;
+      color:var(--pyur-text);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:0 12px 28px rgba(0,0,0,.16);
+    }
+
+    .card h2{
+      margin:0 0 18px;
+      font-size:26px;
+      color:var(--pyur-blue);
+    }
+
+    .field{margin-bottom:15px}
+
+    .field label{
+      display:block;
+      font-weight:700;
+      margin-bottom:8px;
+      font-size:15px;
     }
 
     .field input,
-    .field select {
-      width: 100%;
-      padding: 14px 14px;
-      border-radius: 12px;
-      border: 2px solid #dce3ee;
-      font-size: 15px;
-      outline: none;
+    .field select{
+      width:100%;
+      padding:14px 14px;
+      border-radius:12px;
+      border:2px solid var(--pyur-border);
+      font-size:15px;
+      outline:none;
+      background:#fff;
+      color:var(--pyur-text);
     }
 
     .field input:focus,
-    .field select:focus {
-      border-color: #ff7a00;
+    .field select:focus{
+      border-color:var(--pyur-pink);
     }
 
-    .checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 6px;
-      margin-bottom: 16px;
-      color: #243552;
-      font-weight: bold;
+    .checkbox-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:8px 0 15px;
+      font-weight:700;
+      color:var(--pyur-text);
     }
 
-    .checkbox-row input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
+    .checkbox-row input[type="checkbox"]{
+      width:18px;
+      height:18px;
+      accent-color:var(--pyur-pink);
     }
 
-    .mini-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+    .section-note{
+      font-size:13px;
+      color:#60708d;
+      margin-bottom:14px;
     }
 
-    .result-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-top: 10px;
+    .group-title{
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+      color:#6d7d98;
+      font-weight:700;
+      margin:18px 0 10px;
     }
 
-    .result-box {
-      background: #f4f7fc;
-      border: 1px solid #e3eaf4;
-      border-radius: 18px;
-      padding: 20px;
+    .tarif-btn{
+      width:100%;
+      text-align:left;
+      border:none;
+      border-radius:18px;
+      padding:16px 16px;
+      background:#f4f7fb;
+      color:var(--pyur-text);
+      border:2px solid #e1e8f2;
+      cursor:pointer;
+      transition:.18s ease;
+      font:inherit;
     }
 
-    .result-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #687791;
-      margin-bottom: 10px;
-      font-weight: bold;
+    .tarif-btn:active{
+      transform:scale(.99);
     }
 
-    .result-value {
-      font-size: 30px;
-      font-weight: bold;
-      color: #14294e;
-      line-height: 1.1;
+    .tarif-btn.active{
+      background:linear-gradient(135deg,var(--pyur-blue),var(--pyur-blue-2));
+      color:#fff;
+      border-color:var(--pyur-green);
+      box-shadow:0 10px 24px rgba(36,60,143,.25);
     }
 
-    .result-sub {
-      margin-top: 8px;
-      color: #5d6c87;
-      font-size: 14px;
+    .tarif-btn .name{
+      display:block;
+      font-size:18px;
+      font-weight:700;
+      margin-bottom:4px;
     }
 
-    .tarif-details {
-      margin-top: 18px;
-      background: #f8fbff;
-      border: 1px solid #e3ecf8;
-      border-radius: 18px;
-      padding: 18px;
+    .tarif-btn .sub{
+      display:block;
+      font-size:13px;
+      opacity:.9;
+      line-height:1.35;
     }
 
-    .tarif-name {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #14294e;
+    .tarif-btn .price{
+      display:block;
+      margin-top:8px;
+      font-size:20px;
+      font-weight:700;
     }
 
-    .tarif-meta {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 14px;
+    .tarif-box{
+      margin-top:16px;
+      background:linear-gradient(180deg,#f8fbff,#f1f7ff);
+      border:1px solid #deebfb;
+      border-radius:18px;
+      padding:18px;
     }
 
-    .meta-box {
-      background: #fff;
-      border: 1px solid #e3eaf4;
-      border-radius: 14px;
-      padding: 14px;
+    .tarif-name{
+      font-size:26px;
+      font-weight:700;
+      color:var(--pyur-blue);
+      margin-bottom:8px;
     }
 
-    .meta-label {
-      font-size: 12px;
-      color: #6e7c96;
-      text-transform: uppercase;
-      font-weight: bold;
-      margin-bottom: 8px;
+    .tarif-desc{
+      color:#415372;
+      margin-bottom:14px;
     }
 
-    .meta-value {
-      font-size: 20px;
-      font-weight: bold;
-      color: #14294e;
+    .meta-card{
+      background:#fff;
+      border:1px solid #e2e9f4;
+      border-radius:15px;
+      padding:14px;
     }
 
-    .argument-box {
-      margin-top: 18px;
-      background: linear-gradient(135deg, #fff6ea, #fff2df);
-      border: 1px solid #ffd2a0;
-      border-radius: 18px;
-      padding: 18px;
+    .meta-label{
+      font-size:12px;
+      text-transform:uppercase;
+      font-weight:700;
+      color:#71819b;
+      margin-bottom:8px;
     }
 
-    .argument-box h3 {
-      margin: 0 0 12px;
-      color: #b85a00;
-      font-size: 20px;
+    .meta-value{
+      font-size:20px;
+      font-weight:700;
+      color:var(--pyur-text);
     }
 
-    .argument-box ul {
-      margin: 0;
-      padding-left: 18px;
-      color: #69431a;
+    .argument-box{
+      margin-top:16px;
+      background:linear-gradient(135deg,#fff6ea,#fff1e2);
+      border:1px solid #ffd5ad;
+      border-radius:18px;
+      padding:18px;
     }
 
-    .argument-box li {
-      margin-bottom: 8px;
+    .argument-box h3{
+      margin:0 0 12px;
+      color:#b65b00;
+      font-size:20px;
     }
 
-    .bottom-note {
-      margin-top: 24px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-      padding: 18px;
-      color: #d9e5ff;
+    .argument-box ul{
+      margin:0;
+      padding-left:18px;
+      color:#6a431a;
     }
 
-    .green { color: #118a43 !important; }
-    .red { color: #c33a2c !important; }
-    .orange { color: #d06b00 !important; }
+    .argument-box li{
+      margin-bottom:8px;
+    }
 
-    @media (max-width: 980px) {
-      .grid,
+    .result-box{
+      background:var(--pyur-light);
+      border:1px solid #e1e8f2;
+      border-radius:18px;
+      padding:20px;
+    }
+
+    .result-title{
+      font-size:13px;
+      text-transform:uppercase;
+      font-weight:700;
+      color:#687893;
+      margin-bottom:10px;
+      letter-spacing:.4px;
+    }
+
+    .result-value{
+      font-size:30px;
+      font-weight:700;
+      line-height:1.1;
+      color:var(--pyur-text);
+    }
+
+    .result-sub{
+      margin-top:8px;
+      color:#5d6d88;
+      font-size:14px;
+    }
+
+    .good{color:var(--good)!important}
+    .bad{color:var(--bad)!important}
+    .neutral{color:var(--neutral)!important}
+
+    .summary-tile{
+      border-radius:18px;
+      padding:18px;
+      color:#fff;
+    }
+
+    .summary-tile.blue{background:linear-gradient(135deg,var(--pyur-blue),var(--pyur-blue-2))}
+    .summary-tile.green{background:linear-gradient(135deg,#6cab00,var(--pyur-green))}
+    .summary-tile.pink{background:linear-gradient(135deg,#cf1d53,var(--pyur-pink))}
+
+    .summary-tile .kicker{
+      font-size:12px;
+      opacity:.9;
+      text-transform:uppercase;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .summary-tile .big{
+      font-size:28px;
+      font-weight:700;
+      line-height:1.05;
+    }
+
+    .foot-note{
+      margin-top:22px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.16);
+      color:#edf4ff;
+      border-radius:18px;
+      padding:18px;
+      line-height:1.5;
+    }
+
+    @media (max-width:1100px){
+      .top-grid,
       .result-grid,
-      .tarif-meta,
-      .mini-grid {
-        grid-template-columns: 1fr;
+      .meta-grid,
+      .summary-strip,
+      .mini-grid,
+      .btn-grid{
+        grid-template-columns:1fr;
       }
 
-      h1 { font-size: 28px; }
-      .result-value { font-size: 25px; }
+      h1{font-size:28px}
+      .result-value{font-size:25px}
+      .summary-tile .big{font-size:24px}
     }
   </style>
 </head>
 <body>
   <div class="container">
+
     <div class="hero">
-      <div class="badge">Tarifvergleich / Bestandskunde / Wechselberatung</div>
-      <h1>Aktuelle Kosten mit neuem PYUR Tarif vergleichen</h1>
+      <div class="badge">PŸUR Tarifvergleich / Wechselberatung</div>
+      <h1>Aktuelle Kosten mit dem passenden PŸUR Tarif vergleichen</h1>
       <div class="subtitle">
-        Trage die aktuellen Kundendaten ein, wähle danach den passenden Tarif aus und vergleiche direkt die monatlichen und jährlichen Gesamtkosten.
+        Aktuellen Stand eintragen, passenden Tarif antippen und direkt die monatlichen und jährlichen Unterschiede sehen.
       </div>
     </div>
 
-    <div class="grid">
+    <div class="top-grid">
       <div class="card">
         <h2>Ist-Zustand beim Kunden</h2>
 
@@ -276,116 +403,194 @@
 
         <div class="mini-grid">
           <div class="field">
-            <label for="internetPreis">Aktueller Internetpreis (€ / Monat)</label>
-            <input type="number" id="internetPreis" placeholder="z. B. 39.99" step="0.01" oninput="berechnen()">
+            <label for="internetPreis">Internetpreis aktuell (€ / Monat)</label>
+            <input type="number" id="internetPreis" step="0.01" placeholder="z. B. 44.99" oninput="berechnen()">
           </div>
 
           <div class="field">
-            <label for="sonstigePreis">Sonstige Kosten (€ / Monat)</label>
-            <input type="number" id="sonstigePreis" placeholder="z. B. 0.00" step="0.01" oninput="berechnen()">
+            <label for="routerPreis">Router / Hardware aktuell (€ / Monat)</label>
+            <input type="number" id="routerPreis" step="0.01" placeholder="z. B. 4.99" oninput="berechnen()">
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="field">
+            <label for="sonstigePreis">Sonstige Kosten aktuell (€ / Monat)</label>
+            <input type="number" id="sonstigePreis" step="0.01" placeholder="z. B. 0.00" oninput="berechnen()">
+          </div>
+
+          <div class="field">
+            <label for="altGeschwindigkeit">Aktuelle Geschwindigkeit</label>
+            <input type="text" id="altGeschwindigkeit" placeholder="z. B. 100 Mbit/s" oninput="berechnen()">
           </div>
         </div>
 
         <div class="checkbox-row">
-          <input type="checkbox" id="tvVorhanden" onchange="toggleTvFeld(); berechnen();">
-          <label for="tvVorhanden" style="margin:0;">TV läuft aktuell noch über uns / soll berücksichtigt werden</label>
+          <input type="checkbox" id="tvAltAktiv" onchange="toggleTvAlt(); berechnen();">
+          <label for="tvAltAktiv" style="margin:0;">TV läuft aktuell mit / soll mitgerechnet werden</label>
         </div>
 
-        <div class="field" id="tvPreisWrap" style="display:none;">
-          <label for="tvPreis">TV-Preis aktuell (€ / Monat)</label>
-          <input type="number" id="tvPreis" placeholder="z. B. 10.00" step="0.01" oninput="berechnen()">
+        <div id="tvAltWrap" style="display:none;">
+          <div class="mini-grid">
+            <div class="field">
+              <label for="tvAltPreis">TV aktuell (€ / Monat)</label>
+              <input type="number" id="tvAltPreis" step="0.01" placeholder="z. B. 10.00" oninput="berechnen()">
+            </div>
+
+            <div class="field">
+              <label for="tvAltName">TV aktuell</label>
+              <input type="text" id="tvAltName" placeholder="z. B. Basic TV" oninput="berechnen()">
+            </div>
+          </div>
         </div>
 
         <div class="field">
-          <label for="notiz">Notiz / aktueller Tarif beim Kunden</label>
-          <input type="text" id="notiz" placeholder="z. B. 50er Leitung, alter Vertrag, inkl. TV" oninput="berechnen()">
+          <label for="notiz">Notiz / aktueller Tarif</label>
+          <input type="text" id="notiz" placeholder="z. B. 100er DSL, Router-Miete, TV optional" oninput="berechnen()">
         </div>
       </div>
 
       <div class="card">
-        <h2>Neuen PYUR Tarif auswählen</h2>
+        <h2>Neuen PŸUR Tarif auswählen</h2>
+        <div class="section-note">
+          Große Buttons für iPad-Nutzung beim Kunden. Preise aus deiner Wave-1-Vertriebsinfo.  [oai_citation:2‡2026_02_24_V-Info_Kampagne-Wave1-2026.pdf](sediment://file_00000000c49c7246916739f1fee1bd40)
+        </div>
 
-        <div class="field">
-          <label for="tarifSelect">Tarif / Produkt</label>
-          <select id="tarifSelect" onchange="berechnen()">
-            <optgroup label="Wechseltarife">
-              <option value="wechsel20">Wechsel 20</option>
-              <option value="wechsel50" selected>Wechsel 50</option>
-              <option value="wechsel100">Wechsel 100</option>
-              <option value="wechsel200">Wechsel 200</option>
-              <option value="wechsel250">Wechsel 250</option>
-              <option value="wechsel400">Wechsel 400</option>
-              <option value="wechsel500">Wechsel 500</option>
-              <option value="wechsel750">Wechsel 750</option>
-              <option value="wechsel1000">Wechsel 1000</option>
-            </optgroup>
+        <div class="group-title">Internet Single</div>
+        <div class="btn-grid">
+          <button class="tarif-btn active" data-tarif="pure50" onclick="selectTarif('pure50')">
+            <span class="name">Pure Surf 50</span>
+            <span class="sub">50 / 5 Mbit/s · Internet Single</span>
+            <span class="price">19,00 €</span>
+          </button>
 
-            <optgroup label="Pure Tarife">
-              <option value="pure20">Pure 20</option>
-              <option value="pure50">Pure 50</option>
-              <option value="pure100">Pure 100</option>
-              <option value="pure200">Pure 200</option>
-              <option value="pure250">Pure 250</option>
-              <option value="pure400">Pure 400</option>
-              <option value="pure500">Pure 500</option>
-              <option value="pure750">Pure 750</option>
-              <option value="pure1000">Pure 1000</option>
-            </optgroup>
+          <button class="tarif-btn" data-tarif="pure250" onclick="selectTarif('pure250')">
+            <span class="name">Pure Speed 250</span>
+            <span class="sub">250 / 25 Mbit/s · Internet Single</span>
+            <span class="price">23,00 €</span>
+          </button>
 
-            <optgroup label="Kombi / Beispielprodukte">
-              <option value="combo50tv">Internet 50 + TV</option>
-              <option value="combo250tv">Internet 250 + TV</option>
-              <option value="combo500tv">Internet 500 + TV</option>
-            </optgroup>
-          </select>
+          <button class="tarif-btn" data-tarif="pure500" onclick="selectTarif('pure500')">
+            <span class="name">Pure Speed 500</span>
+            <span class="sub">500 / 50 Mbit/s · Internet Single</span>
+            <span class="price">29,00 €</span>
+          </button>
+
+          <button class="tarif-btn" data-tarif="pure1000" onclick="selectTarif('pure1000')">
+            <span class="name">Pure Speed 1000</span>
+            <span class="sub">1000 / 50 Mbit/s · Internet Single</span>
+            <span class="price">39,00 €</span>
+          </button>
+        </div>
+
+        <div class="group-title">Kombi Light</div>
+        <div class="btn-grid">
+          <button class="tarif-btn" data-tarif="kombiLight500" onclick="selectTarif('kombiLight500')">
+            <span class="name">Kombi Light 500</span>
+            <span class="sub">500 / 50 Mbit/s · Kombi Light</span>
+            <span class="price">34,00 €</span>
+          </button>
+
+          <button class="tarif-btn" data-tarif="kombiLight1000" onclick="selectTarif('kombiLight1000')">
+            <span class="name">Kombi Light 1000</span>
+            <span class="sub">1000 / 50 Mbit/s · Kombi Light</span>
+            <span class="price">44,00 €</span>
+          </button>
+        </div>
+
+        <div class="group-title">Kombi mit PŸUR TV</div>
+        <div class="btn-grid">
+          <button class="tarif-btn" data-tarif="kombi250" onclick="selectTarif('kombi250')">
+            <span class="name">Kombi 250</span>
+            <span class="sub">250 / 25 Mbit/s · TV inklusive</span>
+            <span class="price">35,00 €</span>
+          </button>
+
+          <button class="tarif-btn" data-tarif="kombi500" onclick="selectTarif('kombi500')">
+            <span class="name">Kombi 500</span>
+            <span class="sub">500 / 50 Mbit/s · TV inklusive</span>
+            <span class="price">40,00 €</span>
+          </button>
+
+          <button class="tarif-btn" data-tarif="kombi1000" onclick="selectTarif('kombi1000')">
+            <span class="name">Kombi 1000</span>
+            <span class="sub">1000 / 50 Mbit/s · TV inklusive</span>
+            <span class="price">50,00 €</span>
+          </button>
+        </div>
+
+        <div class="group-title">Zusatzoptionen</div>
+        <div class="mini-grid">
+          <div class="field">
+            <label for="hardwareSelect">Hardware neu</label>
+            <select id="hardwareSelect" onchange="berechnen()">
+              <option value="none">Keine Zusatzhardware</option>
+              <option value="wlanbox">WLAN-Kabelbox 3,99 €</option>
+              <option value="fritz">FRITZ!Box 4,99 €</option>
+              <option value="repeater">FRITZ!Repeater 2,00 €</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="telefonieSelect">Telefonie-Option</label>
+            <select id="telefonieSelect" onchange="berechnen()">
+              <option value="none">Keine Zusatzoption</option>
+              <option value="festnetz">Deutschland Festnetz Flat 2,99 €</option>
+              <option value="mobile">Deutschland Mobile Flat 4,99 €</option>
+              <option value="allnetInternetSingle">International Allnet Flat 24,99 €</option>
+              <option value="allnetKombi">International Allnet Flat 19,99 €</option>
+            </select>
+          </div>
         </div>
 
         <div class="checkbox-row">
-          <input type="checkbox" id="tvNeuMitnehmen" onchange="berechnen()">
-          <label for="tvNeuMitnehmen" style="margin:0;">TV im neuen Angebot zusätzlich mit einrechnen</label>
+          <input type="checkbox" id="tvNeuExtraAktiv" onchange="toggleTvNeu(); berechnen();">
+          <label for="tvNeuExtraAktiv" style="margin:0;">Zusätzliche TV-Option separat einrechnen</label>
         </div>
 
-        <div class="field">
-          <label for="tvNeuPreis">TV neu (€ / Monat)</label>
-          <input type="number" id="tvNeuPreis" placeholder="z. B. 10.00" step="0.01" oninput="berechnen()">
-        </div>
-
-        <div class="tarif-details">
-          <div class="section-label">Ausgewähltes Produkt</div>
-          <div class="tarif-name" id="tarifName">Wechsel 50</div>
-
-          <div id="tarifBeschreibung" style="color:#42526f; margin-bottom: 12px;">
-            Tarifdetails erscheinen hier automatisch.
+        <div id="tvNeuWrap" style="display:none;">
+          <div class="field">
+            <label for="tvNeuSelect">TV-Zusatzoption</label>
+            <select id="tvNeuSelect" onchange="berechnen()">
+              <option value="none">Keine Zusatzoption</option>
+              <option value="hdtv">HDTV 5,00 €</option>
+              <option value="premiumLight">PremiumTV Light 3,00 €</option>
+              <option value="premiumStart">PremiumTV Start 5,00 €</option>
+              <option value="premiumPlus">PremiumTV Plus 15,00 €</option>
+              <option value="unterwegs">Unterwegs TV 1,99 €</option>
+              <option value="tvbox">PŸUR TV Box 4,99 €</option>
+              <option value="soundbox">Video Sound Box 6,99 €</option>
+            </select>
           </div>
+        </div>
 
-          <div class="tarif-meta">
-            <div class="meta-box">
-              <div class="meta-label">Monatspreis</div>
-              <div class="meta-value" id="tarifPreisAnzeige">0,00 €</div>
+        <div class="tarif-box">
+          <div class="tarif-name" id="tarifName">Pure Surf 50</div>
+          <div class="tarif-desc" id="tarifBeschreibung">Tarifdetails erscheinen hier automatisch.</div>
+
+          <div class="meta-grid">
+            <div class="meta-card">
+              <div class="meta-label">Aktionspreis</div>
+              <div class="meta-value" id="tarifPreis">19,00 €</div>
             </div>
-            <div class="meta-box">
+            <div class="meta-card">
+              <div class="meta-label">Listenpreis</div>
+              <div class="meta-value" id="tarifListenpreis">34,99 €</div>
+            </div>
+            <div class="meta-card">
               <div class="meta-label">Download</div>
-              <div class="meta-value" id="tarifDownload">-</div>
+              <div class="meta-value" id="tarifDownload">50 Mbit/s</div>
             </div>
-            <div class="meta-box">
+            <div class="meta-card">
               <div class="meta-label">Upload</div>
-              <div class="meta-value" id="tarifUpload">-</div>
-            </div>
-            <div class="meta-box">
-              <div class="meta-label">Tarifart</div>
-              <div class="meta-value" id="tarifArt">-</div>
+              <div class="meta-value" id="tarifUpload">5 Mbit/s</div>
             </div>
           </div>
         </div>
 
         <div class="argument-box">
-          <h3>Warum sich ein Wechsel oft lohnt</h3>
-          <ul id="argumenteListe">
-            <li>Monatliche Kosten und Leistungen können direkt transparent verglichen werden.</li>
-            <li>Höhere Geschwindigkeiten schaffen mehr Reserve für Streaming, Homeoffice und mehrere Geräte.</li>
-            <li>Eine moderne Tarifstruktur sorgt oft für bessere Planbarkeit im Alltag.</li>
-            <li>Internet und TV können übersichtlich in einer Lösung zusammengeführt werden.</li>
-          </ul>
+          <h3>Vorteile auf einen Blick</h3>
+          <ul id="argumenteListe"></ul>
         </div>
       </div>
     </div>
@@ -401,152 +606,329 @@
         </div>
 
         <div class="result-box">
-          <div class="result-title">Neu pro Monat</div>
+          <div class="result-title">Neu mit PŸUR</div>
           <div class="result-value" id="neuGesamt">0,00 €</div>
           <div class="result-sub" id="neuInfo">Neuer monatlicher Gesamtpreis</div>
         </div>
 
         <div class="result-box">
-          <div class="result-title">Monatlicher Vorteil</div>
-          <div class="result-value orange" id="differenzMonat">0,00 €</div>
-          <div class="result-sub" id="differenzMonatInfo">Vergleich zwischen alt und neu</div>
+          <div class="result-title">Monatlicher Unterschied</div>
+          <div class="result-value neutral" id="differenzMonat">0,00 €</div>
+          <div class="result-sub" id="differenzMonatInfo">Vergleich alt vs. neu</div>
         </div>
 
         <div class="result-box">
-          <div class="result-title">Jährlicher Vorteil</div>
-          <div class="result-value orange" id="differenzJahr">0,00 €</div>
+          <div class="result-title">Jährlicher Unterschied</div>
+          <div class="result-value neutral" id="differenzJahr">0,00 €</div>
           <div class="result-sub" id="differenzJahrInfo">Hochgerechnet auf 12 Monate</div>
+        </div>
+      </div>
+
+      <div class="summary-strip">
+        <div class="summary-tile blue">
+          <div class="kicker">Aktueller Anbieter</div>
+          <div class="big" id="summaryAlt">–</div>
+        </div>
+        <div class="summary-tile green">
+          <div class="kicker">Neuer Tarif</div>
+          <div class="big" id="summaryNeu">–</div>
+        </div>
+        <div class="summary-tile pink">
+          <div class="kicker">Geschwindigkeitsvergleich</div>
+          <div class="big" id="summarySpeed">–</div>
         </div>
       </div>
     </div>
 
-    <div class="bottom-note">
-      <strong>Hinweis:</strong> Preise und Tarifnamen kannst du unten im Code frei anpassen. Wenn du mir gleich deine echten PYUR-Produkte und Preise schickst, mache ich dir danach eine exakt passende Version mit deinen echten Tarifen.
+    <div class="foot-note">
+      Die eingebauten Produktpreise orientieren sich an deiner hochgeladenen Wave-1-Info, einschließlich Internet Single, Kombi Light, Kombi und Zusatzoptionen wie WLAN-Kabelbox, FRITZ!Box, HDTV und weiteren Features.  [oai_citation:3‡2026_02_24_V-Info_Kampagne-Wave1-2026.pdf](sediment://file_00000000c49c7246916739f1fee1bd40)  [oai_citation:4‡2026_02_24_V-Info_Kampagne-Wave1-2026.pdf](sediment://file_00000000c49c7246916739f1fee1bd40)
     </div>
   </div>
 
   <script>
+    let selectedTarif = "pure50";
+
     const tarife = {
-      wechsel20:  { name:"Wechsel 20",  preis:24.99, download:"20 Mbit/s",   upload:"5 Mbit/s",   art:"Wechseltarif", beschreibung:"Einstiegstarif für grundlegende Internetnutzung.", argumente:["Günstiger Einstieg für einfache Nutzung.","Ideal für Einzelpersonen oder leichte Nutzung.","Übersichtliche Kostenstruktur.","Solider Wechsel für Standardbedarf."] },
-      wechsel50:  { name:"Wechsel 50",  preis:29.99, download:"50 Mbit/s",   upload:"10 Mbit/s",  art:"Wechseltarif", beschreibung:"Geeignet für Alltag, Streaming und mehrere Geräte.", argumente:["Passt gut zu typischer Alltagsnutzung.","Mehr Reserve für Streaming und WLAN-Geräte.","Für viele Haushalte ein sinnvoller Standardtarif.","Leistung und Preis oft in gutem Verhältnis."] },
-      wechsel100: { name:"Wechsel 100", preis:32.99, download:"100 Mbit/s",  upload:"20 Mbit/s",  art:"Wechseltarif", beschreibung:"Mehr Leistung für Homeoffice und stabilere Parallelnutzung.", argumente:["Mehr Leistung für parallele Nutzung.","Gut für Homeoffice, Streaming und Updates.","Stärkerer Tarif ohne direkt in hohe Preisbereiche zu gehen.","Bessere Reserve für zukünftige Nutzung."] },
-      wechsel200: { name:"Wechsel 200", preis:33.99, download:"200 Mbit/s",  upload:"25 Mbit/s",  art:"Wechseltarif", beschreibung:"Starker Tarif für höhere Ansprüche im Alltag.", argumente:["Mehr Komfort bei mehreren Geräten.","Schnellere Downloads und flüssigere Nutzung.","Geeignet für wachsende Haushalte.","Moderne Leistungsklasse für viele Anwendungen."] },
-      wechsel250: { name:"Wechsel 250", preis:34.99, download:"250 Mbit/s",  upload:"25 Mbit/s",  art:"Wechseltarif", beschreibung:"Für Familien, Streaming, Gaming und Homeoffice.", argumente:["Sehr gute Balance aus Preis und Leistung.","Geeignet für mehrere Nutzer gleichzeitig.","Komfortabel für Streaming, Gaming und Arbeiten.","Beliebte Größe für moderne Haushalte."] },
-      wechsel400: { name:"Wechsel 400", preis:37.99, download:"400 Mbit/s",  upload:"40 Mbit/s",  art:"Wechseltarif", beschreibung:"Hohe Leistung für datenintensive Nutzung.", argumente:["Spürbar mehr Leistungsreserve.","Sinnvoll bei vielen verbundenen Geräten.","Gute Option für datenintensive Anwendungen.","Mehr Geschwindigkeit für anspruchsvollere Haushalte."] },
-      wechsel500: { name:"Wechsel 500", preis:39.99, download:"500 Mbit/s",  upload:"50 Mbit/s",  art:"Wechseltarif", beschreibung:"Highspeed-Tarif für intensive Nutzung im Haushalt.", argumente:["Sehr stark für Vielnutzer und große Haushalte.","Komfort bei parallelem Streaming und Downloads.","Mehr Zukunftssicherheit im Tarif.","Leistungsstarke Option für hohe Ansprüche."] },
-      wechsel750: { name:"Wechsel 750", preis:44.99, download:"750 Mbit/s",  upload:"75 Mbit/s",  art:"Wechseltarif", beschreibung:"Sehr hohe Geschwindigkeit für große Datenmengen.", argumente:["Ideal für sehr intensive Nutzung.","Große Reserve für viele Endgeräte.","Starke Performance bei hohem Bedarf.","Premium-Niveau mit viel Leistung."] },
-      wechsel1000:{ name:"Wechsel 1000",preis:49.99, download:"1000 Mbit/s", upload:"100 Mbit/s", art:"Wechseltarif", beschreibung:"Top-Geschwindigkeit für höchste Anforderungen.", argumente:["Maximale Geschwindigkeit im Sortiment.","Für höchste Ansprüche und viele Nutzer.","Sehr hohe Zukunftssicherheit.","Top-Tarif für leistungsintensive Haushalte."] },
+      pure50: {
+        name: "Pure Surf 50",
+        preis: 19.00,
+        listenpreis: 34.99,
+        download: 50,
+        upload: 5,
+        art: "Internet Single",
+        beschreibung: "Internet Single Tarif mit starkem Einstiegspreis.",
+        argumente: [
+          "Günstiger monatlicher Einstieg.",
+          "Klarer Tarif für einfache bis normale Alltagsnutzung.",
+          "Übersichtlicher Vergleich zum bisherigen Anbieter.",
+          "Gut für Kunden, die auf Preis und Stabilität schauen."
+        ]
+      },
+      pure250: {
+        name: "Pure Speed 250",
+        preis: 23.00,
+        listenpreis: 39.99,
+        download: 250,
+        upload: 25,
+        art: "Internet Single",
+        beschreibung: "Schneller Single-Tarif für Streaming, Homeoffice und mehrere Geräte.",
+        argumente: [
+          "Mehr Leistungsreserve im Alltag.",
+          "Gut für Streaming, Homeoffice und parallele Nutzung.",
+          "Starkes Verhältnis aus Preis und Geschwindigkeit.",
+          "Für viele Haushalte eine komfortable Größe."
+        ]
+      },
+      pure500: {
+        name: "Pure Speed 500",
+        preis: 29.00,
+        listenpreis: 44.99,
+        download: 500,
+        upload: 50,
+        art: "Internet Single",
+        beschreibung: "Highspeed-Tarif für hohe Ansprüche.",
+        argumente: [
+          "Sehr starke Bandbreite für moderne Haushalte.",
+          "Komfort bei vielen Geräten gleichzeitig.",
+          "Gute Lösung für hohe Ansprüche.",
+          "Attraktiv bei Fokus auf Zukunftssicherheit."
+        ]
+      },
+      pure1000: {
+        name: "Pure Speed 1000",
+        preis: 39.00,
+        listenpreis: 49.99,
+        download: 1000,
+        upload: 50,
+        art: "Internet Single",
+        beschreibung: "Top-Speed für höchste Ansprüche.",
+        argumente: [
+          "Maximale Geschwindigkeit im Portfolio.",
+          "Sehr hohe Leistungsreserve für viele Nutzer.",
+          "Starker Tarif für Premium-Kunden.",
+          "Top-Lösung für maximale Bandbreite."
+        ]
+      },
+      kombiLight500: {
+        name: "Kombi Light 500",
+        preis: 34.00,
+        listenpreis: 49.99,
+        download: 500,
+        upload: 50,
+        art: "Kombi Light",
+        beschreibung: "Internet + Festnetz + Basis TV.",
+        argumente: [
+          "Mehr Leistung plus TV in einer Struktur.",
+          "Übersichtlich für Kunden mit TV-Bedarf.",
+          "Gute Kombination aus Geschwindigkeit und Zusatznutzen.",
+          "Interessant für Haushalte, die bündeln möchten."
+        ]
+      },
+      kombiLight1000: {
+        name: "Kombi Light 1000",
+        preis: 44.00,
+        listenpreis: 54.99,
+        download: 1000,
+        upload: 50,
+        art: "Kombi Light",
+        beschreibung: "Sehr starke Kombi-Light-Lösung mit hoher Bandbreite.",
+        argumente: [
+          "Sehr hohe Geschwindigkeit plus TV-Grundleistung.",
+          "Für Haushalte mit höherem Komfortanspruch.",
+          "Kombiniert Internet und TV übersichtlich.",
+          "Stark, wenn direkt eine große Komplettlösung gewünscht ist."
+        ]
+      },
+      kombi250: {
+        name: "Kombi 250",
+        preis: 35.00,
+        listenpreis: 49.99,
+        download: 250,
+        upload: 25,
+        art: "Kombi mit PŸUR TV",
+        beschreibung: "Internet + PŸUR TV HD + App + Box/Sound Box.",
+        argumente: [
+          "TV bereits sauber integriert.",
+          "Guter Einstieg in die Kombi-Welt.",
+          "Interessant für Kunden mit laufender TV-Nutzung.",
+          "Übersichtlich statt mehrerer Einzelverträge."
+        ]
+      },
+      kombi500: {
+        name: "Kombi 500",
+        preis: 40.00,
+        listenpreis: 54.99,
+        download: 500,
+        upload: 50,
+        art: "Kombi mit PŸUR TV",
+        beschreibung: "Starke Internet- und TV-Kombination.",
+        argumente: [
+          "Hohe Geschwindigkeit plus TV-Leistungen.",
+          "Attraktiv für Familien und Vielnutzer.",
+          "Gute Kombination aus Komfort und Bandbreite.",
+          "Starkes Gesamtpaket für TV und Internet."
+        ]
+      },
+      kombi1000: {
+        name: "Kombi 1000",
+        preis: 50.00,
+        listenpreis: 59.99,
+        download: 1000,
+        upload: 50,
+        art: "Kombi mit PŸUR TV",
+        beschreibung: "Premium-Kombi mit maximaler Bandbreite.",
+        argumente: [
+          "Sehr hohe Leistung plus TV-Komfort.",
+          "Premium-Lösung für anspruchsvolle Haushalte.",
+          "Geeignet für viele Geräte gleichzeitig.",
+          "Top-Paket für Kunden mit Maximum-Anspruch."
+        ]
+      }
+    };
 
-      pure20:  { name:"Pure 20",  preis:22.99, download:"20 Mbit/s",   upload:"5 Mbit/s",   art:"Pure Tarif", beschreibung:"Basis-Tarif für leichte Nutzung.", argumente:["Einfacher Starttarif.","Übersichtlicher Monatspreis.","Für Basisnutzung ausreichend.","Gut für geringe Anforderungen."] },
-      pure50:  { name:"Pure 50",  preis:27.99, download:"50 Mbit/s",   upload:"10 Mbit/s",  art:"Pure Tarif", beschreibung:"Solider Tarif für alltägliche Internetnutzung.", argumente:["Klassischer Standardtarif.","Gute Basis für tägliche Nutzung.","Streaming und Surfen problemlos möglich.","Attraktiver Einstieg in moderne Bandbreiten."] },
-      pure100: { name:"Pure 100", preis:30.99, download:"100 Mbit/s",  upload:"20 Mbit/s",  art:"Pure Tarif", beschreibung:"Mehr Geschwindigkeit für stärkere Nutzung.", argumente:["Mehr Reserve als die kleineren Tarife.","Sinnvoll für mehrere Geräte.","Stabilere Nutzung bei höherem Bedarf.","Guter Zwischenschritt zu höheren Bandbreiten."] },
-      pure200: { name:"Pure 200", preis:31.99, download:"200 Mbit/s",  upload:"25 Mbit/s",  art:"Pure Tarif", beschreibung:"Kräftiger Tarif für digitale Alltagsnutzung.", argumente:["Mehr Leistungsreserve im Alltag.","Geeignet für Familien und intensivere Nutzung.","Starkes Preis-Leistungs-Gefühl.","Komfortableres Nutzungserlebnis."] },
-      pure250: { name:"Pure 250", preis:32.99, download:"250 Mbit/s",  upload:"25 Mbit/s",  art:"Pure Tarif", beschreibung:"Schneller Tarif für moderne Haushalte.", argumente:["Beliebte Bandbreite für aktuelle Haushalte.","Mehr Komfort bei gleichzeitiger Nutzung.","Streaming und Arbeiten parallel gut möglich.","Stabile Wahl im mittleren Leistungsbereich."] },
-      pure400: { name:"Pure 400", preis:35.99, download:"400 Mbit/s",  upload:"40 Mbit/s",  art:"Pure Tarif", beschreibung:"Highspeed für höhere Ansprüche.", argumente:["Spürbar schneller im Alltag.","Gut für datenintensive Nutzung.","Mehr Reserve für viele Geräte.","Komfortorientierte Lösung."] },
-      pure500: { name:"Pure 500", preis:37.99, download:"500 Mbit/s",  upload:"50 Mbit/s",  art:"Pure Tarif", beschreibung:"Starker Highspeed-Tarif.", argumente:["Schnelle Downloads und stabile Nutzung.","Sehr gut für parallele Nutzung.","Mehr Zukunftssicherheit.","Leistungsstarke Haushaltslösung."] },
-      pure750: { name:"Pure 750", preis:42.99, download:"750 Mbit/s",  upload:"75 Mbit/s",  art:"Pure Tarif", beschreibung:"Premium-Tarif mit hoher Leistungsreserve.", argumente:["Premium-Leistung für anspruchsvolle Nutzung.","Viel Reserve für große Datenmengen.","Sinnvoll bei hohem Bandbreitenbedarf.","Sehr starke Gesamtleistung."] },
-      pure1000:{ name:"Pure 1000",preis:47.99, download:"1000 Mbit/s", upload:"100 Mbit/s", art:"Pure Tarif", beschreibung:"Maximale Leistung für höchste Ansprüche.", argumente:["Top-Bandbreite im Produktbereich.","Sehr hohe Zukunftssicherheit.","Geeignet für viele Nutzer und Anwendungen.","Maximaler Komfort bei hoher Auslastung."] },
+    const hardware = {
+      none: { name: "Keine Zusatzhardware", preis: 0 },
+      wlanbox: { name: "WLAN-Kabelbox", preis: 3.99 },
+      fritz: { name: "FRITZ!Box", preis: 4.99 },
+      repeater: { name: "FRITZ!Repeater", preis: 2.00 }
+    };
 
-      combo50tv:  { name:"Internet 50 + TV",  preis:39.99, download:"50 Mbit/s",  upload:"10 Mbit/s", art:"Kombiprodukt", beschreibung:"Internet- und TV-Lösung in einem Paket.", argumente:["Internet und TV in einer Übersicht.","Bündelung kann die Verwaltung vereinfachen.","Geeignet für Haushalte mit TV-Nutzung.","Mehr Übersicht bei laufenden Verträgen."] },
-      combo250tv: { name:"Internet 250 + TV", preis:44.99, download:"250 Mbit/s", upload:"25 Mbit/s", art:"Kombiprodukt", beschreibung:"Schnelles Internet kombiniert mit TV.", argumente:["Starker Kombitarif für moderne Haushalte.","Mehr Leistung plus TV in einer Lösung.","Gut für Familien mit höherem Bedarf.","Komfortable Kombination aus Geschwindigkeit und Unterhaltung."] },
-      combo500tv: { name:"Internet 500 + TV", preis:49.99, download:"500 Mbit/s", upload:"50 Mbit/s", art:"Kombiprodukt", beschreibung:"Highspeed und TV in einem Paket.", argumente:["Schnelles Internet und TV gebündelt.","Attraktiv für Vielnutzer mit TV-Bedarf.","Komfortable Paketlösung.","Leistungsstarkes Gesamtangebot."] }
+    const telefonie = {
+      none: { name: "Keine Zusatzoption", preis: 0 },
+      festnetz: { name: "Deutschland Festnetz Flat", preis: 2.99 },
+      mobile: { name: "Deutschland Mobile Flat", preis: 4.99 },
+      allnetInternetSingle: { name: "International Allnet Flat", preis: 24.99 },
+      allnetKombi: { name: "International Allnet Flat", preis: 19.99 }
+    };
+
+    const tvExtras = {
+      none: { name: "Keine Zusatzoption", preis: 0 },
+      hdtv: { name: "HDTV", preis: 5.00 },
+      premiumLight: { name: "PremiumTV Light", preis: 3.00 },
+      premiumStart: { name: "PremiumTV Start", preis: 5.00 },
+      premiumPlus: { name: "PremiumTV Plus", preis: 15.00 },
+      unterwegs: { name: "Unterwegs TV", preis: 1.99 },
+      tvbox: { name: "PŸUR TV Box", preis: 4.99 },
+      soundbox: { name: "Video Sound Box", preis: 6.99 }
     };
 
     function euro(wert) {
       return wert.toLocaleString("de-DE", { style: "currency", currency: "EUR" });
     }
 
-    function holeZahl(id) {
-      const wert = parseFloat(document.getElementById(id).value);
-      return isNaN(wert) ? 0 : wert;
+    function num(id) {
+      const val = parseFloat(document.getElementById(id).value);
+      return isNaN(val) ? 0 : val;
     }
 
-    function toggleTvFeld() {
-      const tvAn = document.getElementById("tvVorhanden").checked;
-      document.getElementById("tvPreisWrap").style.display = tvAn ? "block" : "none";
+    function toggleTvAlt() {
+      document.getElementById("tvAltWrap").style.display =
+        document.getElementById("tvAltAktiv").checked ? "block" : "none";
     }
 
-    function setArgumente(argumente) {
-      const liste = document.getElementById("argumenteListe");
-      liste.innerHTML = "";
-      argumente.forEach(text => {
+    function toggleTvNeu() {
+      document.getElementById("tvNeuWrap").style.display =
+        document.getElementById("tvNeuExtraAktiv").checked ? "block" : "none";
+    }
+
+    function setArgumente(arr) {
+      const list = document.getElementById("argumenteListe");
+      list.innerHTML = "";
+      arr.forEach(text => {
         const li = document.createElement("li");
         li.textContent = text;
-        liste.appendChild(li);
+        list.appendChild(li);
       });
     }
 
+    function selectTarif(key) {
+      selectedTarif = key;
+      document.querySelectorAll(".tarif-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tarif === key);
+      });
+      berechnen();
+    }
+
     function berechnen() {
-      const anbieter = document.getElementById("anbieter").value || "aktueller Anbieter";
-      const tarifKey = document.getElementById("tarifSelect").value;
-      const tarif = tarife[tarifKey];
+      const anbieter = document.getElementById("anbieter").value || "Aktueller Anbieter";
+      const tarif = tarife[selectedTarif];
 
-      const internetPreis = holeZahl("internetPreis");
-      const sonstigePreis = holeZahl("sonstigePreis");
+      const hardwareKey = document.getElementById("hardwareSelect").value;
+      const hardwareOpt = hardware[hardwareKey];
 
-      const tvAltAktiv = document.getElementById("tvVorhanden").checked;
-      const tvAltPreis = tvAltAktiv ? holeZahl("tvPreis") : 0;
+      const telKey = document.getElementById("telefonieSelect").value;
+      const telOpt = telefonie[telKey];
 
-      const tvNeuAktiv = document.getElementById("tvNeuMitnehmen").checked;
-      const tvNeuPreis = tvNeuAktiv ? holeZahl("tvNeuPreis") : 0;
+      const tvNeuAktiv = document.getElementById("tvNeuExtraAktiv").checked;
+      const tvNeuKey = document.getElementById("tvNeuSelect").value;
+      const tvNeuOpt = tvExtras[tvNeuKey];
 
-      const aktuell = internetPreis + sonstigePreis + tvAltPreis;
-      const neu = tarif.preis + (tvNeuAktiv ? tvNeuPreis : 0);
+      const altInternet = num("internetPreis");
+      const altRouter = num("routerPreis");
+      const altSonstige = num("sonstigePreis");
+      const altTv = document.getElementById("tvAltAktiv").checked ? num("tvAltPreis") : 0;
+
+      const aktuell = altInternet + altRouter + altSonstige + altTv;
+      const neu = tarif.preis + hardwareOpt.preis + telOpt.preis + (tvNeuAktiv ? tvNeuOpt.preis : 0);
 
       const diffMonat = aktuell - neu;
       const diffJahr = diffMonat * 12;
 
       document.getElementById("tarifName").textContent = tarif.name;
-      document.getElementById("tarifPreisAnzeige").textContent = euro(tarif.preis);
-      document.getElementById("tarifDownload").textContent = tarif.download;
-      document.getElementById("tarifUpload").textContent = tarif.upload;
-      document.getElementById("tarifArt").textContent = tarif.art;
-      document.getElementById("tarifBeschreibung").textContent = tarif.beschreibung;
+      document.getElementById("tarifBeschreibung").textContent = tarif.beschreibung + " (" + tarif.art + ")";
+      document.getElementById("tarifPreis").textContent = euro(tarif.preis);
+      document.getElementById("tarifListenpreis").textContent = euro(tarif.listenpreis);
+      document.getElementById("tarifDownload").textContent = tarif.download + " Mbit/s";
+      document.getElementById("tarifUpload").textContent = tarif.upload + " Mbit/s";
       setArgumente(tarif.argumente);
 
       document.getElementById("aktuellGesamt").textContent = euro(aktuell);
       document.getElementById("neuGesamt").textContent = euro(neu);
 
-      document.getElementById("aktuellInfo").textContent =
-        "Aktuelle monatliche Gesamtkosten bei " + anbieter;
-
+      document.getElementById("aktuellInfo").textContent = "Aktuelle monatliche Gesamtkosten bei " + anbieter;
       document.getElementById("neuInfo").textContent =
-        "Neuer monatlicher Gesamtpreis mit " + tarif.name;
+        tarif.name + " + " + hardwareOpt.name +
+        (telOpt.preis > 0 ? " + " + telOpt.name : "") +
+        (tvNeuAktiv && tvNeuOpt.preis > 0 ? " + " + tvNeuOpt.name : "");
 
       const monatEl = document.getElementById("differenzMonat");
-      const monatInfoEl = document.getElementById("differenzMonatInfo");
       const jahrEl = document.getElementById("differenzJahr");
-      const jahrInfoEl = document.getElementById("differenzJahrInfo");
+      const monatInfo = document.getElementById("differenzMonatInfo");
+      const jahrInfo = document.getElementById("differenzJahrInfo");
 
-      monatEl.classList.remove("green", "red", "orange");
-      jahrEl.classList.remove("green", "red", "orange");
+      monatEl.className = "result-value neutral";
+      jahrEl.className = "result-value neutral";
 
       if (diffMonat > 0) {
         monatEl.textContent = euro(diffMonat) + " weniger";
         jahrEl.textContent = euro(diffJahr) + " pro Jahr";
-        monatEl.classList.add("green");
-        jahrEl.classList.add("green");
-        monatInfoEl.textContent = "Neuer Tarif ist monatlich günstiger";
-        jahrInfoEl.textContent = "Jährliche Ersparnis gegenüber dem bisherigen Stand";
+        monatEl.className = "result-value good";
+        jahrEl.className = "result-value good";
+        monatInfo.textContent = "Neuer Tarif ist monatlich günstiger";
+        jahrInfo.textContent = "Jährliche Ersparnis gegenüber dem bisherigen Stand";
       } else if (diffMonat < 0) {
         monatEl.textContent = euro(Math.abs(diffMonat)) + " mehr";
         jahrEl.textContent = euro(Math.abs(diffJahr)) + " pro Jahr";
-        monatEl.classList.add("red");
-        jahrEl.classList.add("red");
-        monatInfoEl.textContent = "Neuer Tarif ist monatlich teurer";
-        jahrInfoEl.textContent = "Jährlicher Mehrpreis gegenüber dem bisherigen Stand";
+        monatEl.className = "result-value bad";
+        jahrEl.className = "result-value bad";
+        monatInfo.textContent = "Neuer Tarif ist monatlich teurer";
+        jahrInfo.textContent = "Jährlicher Mehrpreis gegenüber dem bisherigen Stand";
       } else {
         monatEl.textContent = "0,00 € gleich";
         jahrEl.textContent = "0,00 € gleich";
-        monatEl.classList.add("orange");
-        jahrEl.classList.add("orange");
-        monatInfoEl.textContent = "Beide Varianten liegen auf gleichem Niveau";
-        jahrInfoEl.textContent = "Auf 12 Monate ergibt sich kein Unterschied";
+        monatInfo.textContent = "Beide Varianten liegen gleich";
+        jahrInfo.textContent = "Auf 12 Monate kein Unterschied";
       }
+
+      const altSpeed = document.getElementById("altGeschwindigkeit").value || "unbekannt";
+      document.getElementById("summaryAlt").textContent = anbieter;
+      document.getElementById("summaryNeu").textContent = tarif.name;
+      document.getElementById("summarySpeed").textContent = altSpeed + " → " + tarif.download + " Mbit/s";
     }
 
-    toggleTvFeld();
-    berechnen();
+    toggleTvAlt();
+    toggleTvNeu();
+    selectTarif("pure50");
   </script>
 </body>
 </html>
