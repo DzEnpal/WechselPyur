@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PYUR Tarifübersicht – Umstellung & Wechseltarife</title>
+  <title>PYUR Tarifvergleich – Ist-Zustand / Wechsel</title>
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0c1b33, #13284b);
-      color: #ffffff;
-      line-height: 1.6;
+      background: linear-gradient(135deg, #0b1930, #14294e);
+      color: #fff;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 24px;
     }
@@ -27,459 +25,530 @@
     .hero {
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-      padding: 32px 24px;
+      border-radius: 20px;
+      padding: 28px;
       margin-bottom: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
     }
 
     .badge {
       display: inline-block;
       background: #ff7a00;
       color: #fff;
-      font-weight: bold;
       font-size: 13px;
+      font-weight: bold;
       padding: 8px 14px;
       border-radius: 999px;
       margin-bottom: 16px;
     }
 
     h1 {
+      margin: 0 0 10px;
       font-size: 34px;
-      margin-bottom: 14px;
       line-height: 1.2;
     }
 
     .subtitle {
-      font-size: 18px;
-      color: #d8e3ff;
-      max-width: 850px;
+      color: #d8e4ff;
+      font-size: 17px;
+      max-width: 900px;
     }
 
-    .info-box {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin: 24px 0 30px;
-    }
-
-    .info-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 18px;
-    }
-
-    .info-card h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: #ffb066;
-    }
-
-    .selection-box {
-      background: #ffffff;
-      color: #13284b;
-      border-radius: 18px;
-      padding: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
       margin-bottom: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
     }
 
-    .selection-box h2 {
+    .card {
+      background: #fff;
+      color: #14294e;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 18px;
       font-size: 26px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #6a7892;
       margin-bottom: 10px;
     }
 
-    .selection-box p {
-      margin-bottom: 18px;
-      color: #42506d;
+    .field {
+      margin-bottom: 16px;
     }
 
-    label {
+    .field label {
       display: block;
       font-weight: bold;
-      margin-bottom: 10px;
-      font-size: 16px;
+      margin-bottom: 8px;
+      font-size: 15px;
     }
 
-    select {
+    .field input,
+    .field select {
       width: 100%;
-      max-width: 420px;
-      padding: 14px 16px;
+      padding: 14px 14px;
       border-radius: 12px;
-      border: 2px solid #d8dfea;
-      font-size: 16px;
+      border: 2px solid #dce3ee;
+      font-size: 15px;
       outline: none;
-      background: #fff;
-      color: #13284b;
     }
 
-    select:focus {
+    .field input:focus,
+    .field select:focus {
       border-color: #ff7a00;
     }
 
-    .tariff-card {
-      background: #ffffff;
-      color: #13284b;
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .tariff-top {
+    .checkbox-row {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      color: #243552;
+      font-weight: bold;
     }
 
-    .tariff-name {
+    .checkbox-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .result-box {
+      background: #f4f7fc;
+      border: 1px solid #e3eaf4;
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .result-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #687791;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .result-value {
       font-size: 30px;
       font-weight: bold;
-      margin-bottom: 8px;
+      color: #14294e;
+      line-height: 1.1;
     }
 
-    .tariff-tag {
-      display: inline-block;
-      background: #eaf2ff;
-      color: #1d4e9e;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .price-box {
-      text-align: right;
-      min-width: 180px;
-    }
-
-    .price {
-      font-size: 42px;
-      font-weight: bold;
-      color: #ff7a00;
-      line-height: 1;
-    }
-
-    .price-note {
+    .result-sub {
+      margin-top: 8px;
+      color: #5d6c87;
       font-size: 14px;
-      color: #5d6b87;
-      margin-top: 6px;
     }
 
-    .desc {
-      font-size: 17px;
-      color: #31415f;
-      margin-bottom: 22px;
-      max-width: 850px;
-    }
-
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .detail {
-      background: #f4f7fc;
-      border-radius: 16px;
+    .tarif-details {
+      margin-top: 18px;
+      background: #f8fbff;
+      border: 1px solid #e3ecf8;
+      border-radius: 18px;
       padding: 18px;
-      border: 1px solid #e5ebf5;
     }
 
-    .detail-label {
-      font-size: 13px;
-      color: #667592;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-
-    .detail-value {
+    .tarif-name {
       font-size: 24px;
       font-weight: bold;
-      color: #13284b;
-    }
-
-    .highlight-box {
-      background: linear-gradient(135deg, #fff5eb, #fff0df);
-      border: 1px solid #ffd2a8;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .highlight-box h3 {
-      color: #c95f00;
       margin-bottom: 10px;
-      font-size: 20px;
+      color: #14294e;
     }
 
-    .highlight-box ul {
-      padding-left: 18px;
-    }
-
-    .highlight-box li {
-      margin-bottom: 8px;
-      color: #603d1b;
-    }
-
-    .note {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      padding: 20px;
-      margin-top: 24px;
-      color: #dce6ff;
-    }
-
-    .footer-hint {
-      font-size: 14px;
-      color: #c7d5f5;
+    .tarif-meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
       margin-top: 14px;
     }
 
-    @media (max-width: 768px) {
+    .meta-box {
+      background: #fff;
+      border: 1px solid #e3eaf4;
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .meta-label {
+      font-size: 12px;
+      color: #6e7c96;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .meta-value {
+      font-size: 20px;
+      font-weight: bold;
+      color: #14294e;
+    }
+
+    .bottom-note {
+      margin-top: 24px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 18px;
+      color: #d9e5ff;
+    }
+
+    .green {
+      color: #118a43 !important;
+    }
+
+    .red {
+      color: #c33a2c !important;
+    }
+
+    .orange {
+      color: #d06b00 !important;
+    }
+
+    @media (max-width: 950px) {
+      .grid,
+      .result-grid,
+      .tarif-meta,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
       h1 {
         font-size: 28px;
       }
 
-      .tariff-name {
-        font-size: 24px;
-      }
-
-      .price {
-        font-size: 34px;
-      }
-
-      .price-box {
-        text-align: left;
-      }
-
-      .tariff-top {
-        flex-direction: column;
-        align-items: flex-start;
+      .result-value {
+        font-size: 25px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-
-    <section class="hero">
-      <div class="badge">Offizielle Tarifübersicht / Netzmodernisierung</div>
-      <h1>Umstellung auf zukunftsfähige Anschlusstechnik</h1>
-      <p class="subtitle">
-        Im Rahmen der Netzmodernisierung werden ältere Anschlussarten schrittweise auf moderne Technologien umgestellt.
-        Für bestehende Kunden stehen hierfür passende <strong>Wechseltarife</strong> zur Verfügung. Nachfolgend kann
-        der passende Tarif direkt ausgewählt und angezeigt werden.
-      </p>
-
-      <div class="info-box">
-        <div class="info-card">
-          <h3>Warum die Umstellung?</h3>
-          <p>Ältere Infrastrukturen werden sukzessive modernisiert, damit Anschlüsse langfristig stabil, leistungsfähig und zukunftssicher bleiben.</p>
-        </div>
-        <div class="info-card">
-          <h3>Was bedeutet das für Kunden?</h3>
-          <p>Je nach Anschlussart ist ein Tarifwechsel bzw. eine technische Umstellung erforderlich, damit die Versorgung weiterhin sichergestellt bleibt.</p>
-        </div>
-        <div class="info-card">
-          <h3>Welche Tarife sind relevant?</h3>
-          <p>Im Mittelpunkt stehen vor allem die verfügbaren Wechseltarife, die im Rahmen der Umstellung angeboten werden können.</p>
-        </div>
+    <div class="hero">
+      <div class="badge">Tarifvergleich / Bestandskunde / Wechselberatung</div>
+      <h1>Aktuelle Kosten mit neuem PYUR Tarif vergleichen</h1>
+      <div class="subtitle">
+        Trage einfach die aktuellen Kundendaten ein, wähle danach den passenden PYUR-Tarif aus und die monatlichen Kosten werden direkt gegenübergestellt.
       </div>
-    </section>
+    </div>
 
-    <section class="selection-box">
-      <h2>Wechseltarif auswählen</h2>
-      <p>Hier kann direkt das passende Produkt ausgewählt werden. Die Tarifdetails werden darunter automatisch angezeigt.</p>
+    <div class="grid">
+      <div class="card">
+        <h2>Ist-Zustand beim Kunden</h2>
 
-      <label for="tarifSelect">Produkt / Wechseltarif</label>
-      <select id="tarifSelect" onchange="updateTarif()">
-        <option value="wechsel20">Wechseltarif 20</option>
-        <option value="wechsel50" selected>Wechseltarif 50</option>
-        <option value="wechsel250">Wechseltarif 250</option>
-        <option value="wechsel500">Wechseltarif 500</option>
-        <option value="wechsel1000">Wechseltarif 1000</option>
-      </select>
-    </section>
-
-    <section class="tariff-card">
-      <div class="tariff-top">
-        <div>
-          <div class="tariff-name" id="tarifName">Wechseltarif 50</div>
-          <div class="tariff-tag" id="tarifTag">Empfohlener Wechseltarif</div>
+        <div class="field">
+          <label for="anbieter">Aktueller Anbieter</label>
+          <input type="text" id="anbieter" placeholder="z. B. Telekom, Vodafone, o2, 1&1" oninput="berechnen()">
         </div>
 
-        <div class="price-box">
-          <div class="price" id="tarifPrice">29,99 €</div>
-          <div class="price-note" id="tarifPriceNote">pro Monat</div>
+        <div class="mini-grid">
+          <div class="field">
+            <label for="internetPreis">Aktueller Internetpreis (€ / Monat)</label>
+            <input type="number" id="internetPreis" placeholder="z. B. 39.99" step="0.01" oninput="berechnen()">
+          </div>
+
+          <div class="field">
+            <label for="sonstigePreis">Sonstige Kosten (€ / Monat)</label>
+            <input type="number" id="sonstigePreis" placeholder="z. B. 0.00" step="0.01" oninput="berechnen()">
+          </div>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="tvVorhanden" onchange="toggleTvFeld(); berechnen();">
+          <label for="tvVorhanden" style="margin:0;">TV läuft aktuell noch über uns / soll berücksichtigt werden</label>
+        </div>
+
+        <div class="field" id="tvPreisWrap" style="display:none;">
+          <label for="tvPreis">TV-Preis aktuell (€ / Monat)</label>
+          <input type="number" id="tvPreis" placeholder="z. B. 10.00" step="0.01" oninput="berechnen()">
+        </div>
+
+        <div class="field">
+          <label for="notiz">Notiz / aktueller Tarif beim Kunden</label>
+          <input type="text" id="notiz" placeholder="z. B. 50er Leitung, alter Vertrag, inkl. TV" oninput="berechnen()">
         </div>
       </div>
 
-      <p class="desc" id="tarifDesc">
-        Geeignet für Haushalte mit klassischer Internetnutzung, Streaming, Homeoffice und mehreren Geräten gleichzeitig.
-      </p>
+      <div class="card">
+        <h2>Neuen PYUR Tarif auswählen</h2>
 
-      <div class="details-grid">
-        <div class="detail">
-          <div class="detail-label">Download</div>
-          <div class="detail-value" id="tarifDownload">50 Mbit/s</div>
+        <div class="field">
+          <label for="tarifSelect">PYUR Tarif</label>
+          <select id="tarifSelect" onchange="berechnen()">
+            <option value="wechsel20">Wechsel 20</option>
+            <option value="wechsel50">Wechsel 50</option>
+            <option value="wechsel100">Wechsel 100</option>
+            <option value="wechsel250">Wechsel 250</option>
+            <option value="wechsel500">Wechsel 500</option>
+            <option value="wechsel1000">Wechsel 1000</option>
+            <option value="pure20">Pure 20</option>
+            <option value="pure50">Pure 50</option>
+            <option value="pure250">Pure 250</option>
+            <option value="pure500">Pure 500</option>
+            <option value="pure1000">Pure 1000</option>
+          </select>
         </div>
-        <div class="detail">
-          <div class="detail-label">Upload</div>
-          <div class="detail-value" id="tarifUpload">10 Mbit/s</div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="tvNeuMitnehmen" onchange="berechnen()">
+          <label for="tvNeuMitnehmen" style="margin:0;">TV im neuen Angebot mit einrechnen</label>
         </div>
-        <div class="detail">
-          <div class="detail-label">Tarifart</div>
-          <div class="detail-value" id="tarifType">Wechseltarif</div>
+
+        <div class="field" id="tvNeuWrap">
+          <label for="tvNeuPreis">TV neu (€ / Monat)</label>
+          <input type="number" id="tvNeuPreis" placeholder="z. B. 10.00" step="0.01" oninput="berechnen()">
         </div>
-        <div class="detail">
-          <div class="detail-label">Geeignet für</div>
-          <div class="detail-value" id="tarifUse">Alltag & Streaming</div>
+
+        <div class="tarif-details">
+          <div class="section-label">Ausgewähltes Produkt</div>
+          <div class="tarif-name" id="tarifName">Wechsel 20</div>
+
+          <div id="tarifBeschreibung" style="color:#42526f; margin-bottom: 12px;">
+            Tarifdetails erscheinen hier automatisch.
+          </div>
+
+          <div class="tarif-meta">
+            <div class="meta-box">
+              <div class="meta-label">Monatspreis</div>
+              <div class="meta-value" id="tarifPreisAnzeige">0,00 €</div>
+            </div>
+            <div class="meta-box">
+              <div class="meta-label">Download</div>
+              <div class="meta-value" id="tarifDownload">-</div>
+            </div>
+            <div class="meta-box">
+              <div class="meta-label">Upload</div>
+              <div class="meta-value" id="tarifUpload">-</div>
+            </div>
+            <div class="meta-box">
+              <div class="meta-label">Tarifart</div>
+              <div class="meta-value" id="tarifArt">-</div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="highlight-box">
-        <h3>Ihre Vorteile bei der Umstellung</h3>
-        <ul id="tarifBenefits">
-          <li>Passender Tarif im Rahmen der technischen Umstellung</li>
-          <li>Zukunftsfähiger Anschluss für moderne Nutzung</li>
-          <li>Geeignet für mehrere Geräte im Haushalt</li>
-          <li>Stabile Versorgung und bessere Planbarkeit</li>
-        </ul>
+    <div class="card">
+      <h2>Monatlicher Vergleich</h2>
+
+      <div class="result-grid">
+        <div class="result-box">
+          <div class="result-title">Aktuell</div>
+          <div class="result-value" id="aktuellGesamt">0,00 €</div>
+          <div class="result-sub" id="aktuellInfo">Aktuelle monatliche Gesamtkosten</div>
+        </div>
+
+        <div class="result-box">
+          <div class="result-title">Neu bei PYUR</div>
+          <div class="result-value" id="neuGesamt">0,00 €</div>
+          <div class="result-sub" id="neuInfo">Neuer monatlicher Gesamtpreis</div>
+        </div>
+
+        <div class="result-box">
+          <div class="result-title">Differenz</div>
+          <div class="result-value orange" id="differenz">0,00 €</div>
+          <div class="result-sub" id="differenzInfo">Vergleich zwischen alt und neu</div>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section class="note">
-      <strong>Hinweis:</strong> Die dargestellten Produkte dienen als Übersicht im Rahmen einer Anschluss- bzw. Tarifumstellung.
-      Verfügbarkeit, technische Voraussetzungen und konkrete Konditionen können je nach Adresse und Gebäudestruktur abweichen.
-      <div class="footer-hint">
-        Interne Beratungsseite zur verständlichen Darstellung möglicher Wechseloptionen.
-      </div>
-    </section>
-
+    <div class="bottom-note">
+      <strong>Hinweis:</strong> Preise, Verfügbarkeiten und Tarifbezeichnungen kannst du unten im Code jederzeit anpassen. Dadurch kannst du die Seite schnell für deine echten PYUR-Produkte und Wechseltarife abändern.
+    </div>
   </div>
 
   <script>
     const tarife = {
       wechsel20: {
-        name: "Wechseltarif 20",
-        tag: "Basis-Wechseltarif",
-        price: "24,99 €",
-        priceNote: "pro Monat",
-        desc: "Der passende Einstiegstarif für einfache Internetnutzung wie Surfen, E-Mails und einzelne Streaming-Anwendungen.",
+        name: "Wechsel 20",
+        preis: 24.99,
         download: "20 Mbit/s",
         upload: "5 Mbit/s",
-        type: "Wechseltarif",
-        use: "Basisnutzung",
-        benefits: [
-          "Geeignet für grundlegende Internetnutzung",
-          "Passend für kleinere Haushalte",
-          "Solide Lösung im Rahmen der Umstellung",
-          "Einfacher Einstieg in moderne Anschlusstechnik"
-        ]
+        art: "Wechseltarif",
+        beschreibung: "Einfacher Wechseltarif für grundlegende Internetnutzung."
       },
       wechsel50: {
-        name: "Wechseltarif 50",
-        tag: "Empfohlener Wechseltarif",
-        price: "29,99 €",
-        priceNote: "pro Monat",
-        desc: "Geeignet für Haushalte mit klassischer Internetnutzung, Streaming, Homeoffice und mehreren Geräten gleichzeitig.",
+        name: "Wechsel 50",
+        preis: 29.99,
         download: "50 Mbit/s",
         upload: "10 Mbit/s",
-        type: "Wechseltarif",
-        use: "Alltag & Streaming",
-        benefits: [
-          "Passender Tarif im Rahmen der technischen Umstellung",
-          "Zukunftsfähiger Anschluss für moderne Nutzung",
-          "Geeignet für mehrere Geräte im Haushalt",
-          "Stabile Versorgung und bessere Planbarkeit"
-        ]
+        art: "Wechseltarif",
+        beschreibung: "Geeignet für Alltag, Streaming und mehrere Geräte."
+      },
+      wechsel100: {
+        name: "Wechsel 100",
+        preis: 32.99,
+        download: "100 Mbit/s",
+        upload: "20 Mbit/s",
+        art: "Wechseltarif",
+        beschreibung: "Gute Lösung für stärkere Nutzung im Alltag."
       },
       wechsel250: {
-        name: "Wechseltarif 250",
-        tag: "Starker Haushaltstarif",
-        price: "34,99 €",
-        priceNote: "pro Monat",
-        desc: "Ideal für anspruchsvollere Nutzung mit mehreren Personen, UHD-Streaming, Homeoffice und höherem Datenbedarf.",
+        name: "Wechsel 250",
+        preis: 34.99,
         download: "250 Mbit/s",
         upload: "25 Mbit/s",
-        type: "Wechseltarif",
-        use: "Familie & Homeoffice",
-        benefits: [
-          "Sehr gute Leistung für mehrere Nutzer gleichzeitig",
-          "Optimal für Streaming, Gaming und Arbeiten von zuhause",
-          "Spürbar mehr Leistungsreserve im Alltag",
-          "Geeignet für moderne Mediennutzung"
-        ]
+        art: "Wechseltarif",
+        beschreibung: "Starker Tarif für Familien, Homeoffice und Streaming."
       },
       wechsel500: {
-        name: "Wechseltarif 500",
-        tag: "Highspeed-Wechseltarif",
-        price: "39,99 €",
-        priceNote: "pro Monat",
-        desc: "Für Haushalte mit hohem Leistungsbedarf, vielen Geräten, intensiver Nutzung und sehr schnellen Downloads.",
+        name: "Wechsel 500",
+        preis: 39.99,
         download: "500 Mbit/s",
         upload: "50 Mbit/s",
-        type: "Wechseltarif",
-        use: "Vielnutzer & Gaming",
-        benefits: [
-          "Hohe Geschwindigkeit für große Haushalte",
-          "Starke Performance bei paralleler Nutzung",
-          "Ideal für datenintensive Anwendungen",
-          "Mehr Komfort und Geschwindigkeit im Alltag"
-        ]
+        art: "Wechseltarif",
+        beschreibung: "Für hohe Anforderungen, viele Geräte und schnelle Downloads."
       },
       wechsel1000: {
-        name: "Wechseltarif 1000",
-        tag: "Maximale Leistung",
-        price: "49,99 €",
-        priceNote: "pro Monat",
-        desc: "Das Top-Produkt für maximale Geschwindigkeit, höchste Ansprüche und leistungsintensive Anwendungen im gesamten Haushalt.",
+        name: "Wechsel 1000",
+        preis: 49.99,
         download: "1000 Mbit/s",
         upload: "100 Mbit/s",
-        type: "Wechseltarif",
-        use: "Premium & Maximum",
-        benefits: [
-          "Maximale Surfgeschwindigkeit für höchste Ansprüche",
-          "Optimal für große Datenmengen und viele Geräte",
-          "Top-Leistung für Streaming, Gaming und Homeoffice",
-          "Besonders zukunftssichere Lösung"
-        ]
+        art: "Wechseltarif",
+        beschreibung: "Maximale Geschwindigkeit für anspruchsvolle Nutzung."
+      },
+      pure20: {
+        name: "Pure 20",
+        preis: 22.99,
+        download: "20 Mbit/s",
+        upload: "5 Mbit/s",
+        art: "Pure Tarif",
+        beschreibung: "Basis-Pure-Tarif für leichte Nutzung."
+      },
+      pure50: {
+        name: "Pure 50",
+        preis: 27.99,
+        download: "50 Mbit/s",
+        upload: "10 Mbit/s",
+        art: "Pure Tarif",
+        beschreibung: "Solider Tarif für klassische Internetnutzung."
+      },
+      pure250: {
+        name: "Pure 250",
+        preis: 32.99,
+        download: "250 Mbit/s",
+        upload: "25 Mbit/s",
+        art: "Pure Tarif",
+        beschreibung: "Schneller Tarif für moderne Haushalte."
+      },
+      pure500: {
+        name: "Pure 500",
+        preis: 37.99,
+        download: "500 Mbit/s",
+        upload: "50 Mbit/s",
+        art: "Pure Tarif",
+        beschreibung: "Highspeed-Tarif für starke Nutzung."
+      },
+      pure1000: {
+        name: "Pure 1000",
+        preis: 47.99,
+        download: "1000 Mbit/s",
+        upload: "100 Mbit/s",
+        art: "Pure Tarif",
+        beschreibung: "Top-Geschwindigkeit für höchste Ansprüche."
       }
     };
 
-    function updateTarif() {
-      const selected = document.getElementById("tarifSelect").value;
-      const tarif = tarife[selected];
-
-      document.getElementById("tarifName").textContent = tarif.name;
-      document.getElementById("tarifTag").textContent = tarif.tag;
-      document.getElementById("tarifPrice").textContent = tarif.price;
-      document.getElementById("tarifPriceNote").textContent = tarif.priceNote;
-      document.getElementById("tarifDesc").textContent = tarif.desc;
-      document.getElementById("tarifDownload").textContent = tarif.download;
-      document.getElementById("tarifUpload").textContent = tarif.upload;
-      document.getElementById("tarifType").textContent = tarif.type;
-      document.getElementById("tarifUse").textContent = tarif.use;
-
-      const benefitsList = document.getElementById("tarifBenefits");
-      benefitsList.innerHTML = "";
-      tarif.benefits.forEach(vorteil => {
-        const li = document.createElement("li");
-        li.textContent = vorteil;
-        benefitsList.appendChild(li);
+    function euro(wert) {
+      return wert.toLocaleString("de-DE", {
+        style: "currency",
+        currency: "EUR"
       });
     }
 
-    updateTarif();
+    function holeZahl(id) {
+      const wert = parseFloat(document.getElementById(id).value);
+      return isNaN(wert) ? 0 : wert;
+    }
+
+    function toggleTvFeld() {
+      const tvAn = document.getElementById("tvVorhanden").checked;
+      document.getElementById("tvPreisWrap").style.display = tvAn ? "block" : "none";
+    }
+
+    function berechnen() {
+      const anbieter = document.getElementById("anbieter").value || "aktueller Anbieter";
+      const tarifKey = document.getElementById("tarifSelect").value;
+      const tarif = tarife[tarifKey];
+
+      const internetPreis = holeZahl("internetPreis");
+      const sonstigePreis = holeZahl("sonstigePreis");
+
+      const tvAltAktiv = document.getElementById("tvVorhanden").checked;
+      const tvAltPreis = tvAltAktiv ? holeZahl("tvPreis") : 0;
+
+      const tvNeuAktiv = document.getElementById("tvNeuMitnehmen").checked;
+      const tvNeuPreis = tvNeuAktiv ? holeZahl("tvNeuPreis") : 0;
+
+      const aktuell = internetPreis + sonstigePreis + tvAltPreis;
+      const neu = tarif.preis + tvNeuPreis;
+      const diff = neu - aktuell;
+
+      document.getElementById("tarifName").textContent = tarif.name;
+      document.getElementById("tarifPreisAnzeige").textContent = euro(tarif.preis);
+      document.getElementById("tarifDownload").textContent = tarif.download;
+      document.getElementById("tarifUpload").textContent = tarif.upload;
+      document.getElementById("tarifArt").textContent = tarif.art;
+      document.getElementById("tarifBeschreibung").textContent = tarif.beschreibung;
+
+      document.getElementById("aktuellGesamt").textContent = euro(aktuell);
+      document.getElementById("neuGesamt").textContent = euro(neu);
+
+      document.getElementById("aktuellInfo").textContent =
+        "Aktuelle monatliche Gesamtkosten bei " + anbieter;
+
+      document.getElementById("neuInfo").textContent =
+        "Neuer monatlicher Gesamtpreis mit " + tarif.name;
+
+      const diffEl = document.getElementById("differenz");
+      const diffInfoEl = document.getElementById("differenzInfo");
+
+      diffEl.classList.remove("green", "red", "orange");
+
+      if (diff < 0) {
+        diffEl.textContent = euro(Math.abs(diff)) + " günstiger";
+        diffEl.classList.add("green");
+        diffInfoEl.textContent = "Der neue Tarif ist monatlich günstiger";
+      } else if (diff > 0) {
+        diffEl.textContent = euro(diff) + " mehr";
+        diffEl.classList.add("red");
+        diffInfoEl.textContent = "Der neue Tarif ist monatlich teurer";
+      } else {
+        diffEl.textContent = "0,00 € gleich";
+        diffEl.classList.add("orange");
+        diffInfoEl.textContent = "Beide Varianten liegen auf gleichem Niveau";
+      }
+    }
+
+    toggleTvFeld();
+    berechnen();
   </script>
 </body>
 </html>
