@@ -1,783 +1,320 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PŸUR Wechselberatung</title>
-  <style>
-    :root{
-      --pyur-blue:#243c8f;
-      --pyur-blue-2:#3157b7;
-      --pyur-cyan:#2bb9e8;
-      --pyur-green:#9ccf10;
-      --pyur-pink:#e61e5c;
-      --pyur-white:#ffffff;
-      --pyur-light:#f4f7fb;
-      --pyur-border:#dce3ef;
-      --pyur-text:#20304d;
-      --good:#148546;
-      --bad:#c63a2f;
-      --neutral:#c97800;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PŸUR Wechselberatung</title>
 
-    *{box-sizing:border-box}
+<style>
 
-    body{
-      margin:0;
-      font-family:Arial,sans-serif;
-      color:#fff;
-      background:linear-gradient(135deg,var(--pyur-blue) 0%,var(--pyur-blue-2) 55%,var(--pyur-cyan) 100%);
-    }
+:root{
+--pyur-blue:#243c8f;
+--pyur-blue-2:#3157b7;
+--pyur-cyan:#2bb9e8;
+--pyur-green:#9ccf10;
+--pyur-pink:#e61e5c;
+--pyur-light:#f4f7fb;
+--pyur-text:#20304d;
+--good:#148546;
+--bad:#c63a2f;
+--neutral:#c97800;
+}
 
-    .container{
-      max-width:1380px;
-      margin:0 auto;
-      padding:20px;
-    }
+*{box-sizing:border-box}
 
-    .hero{
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.08));
-      border:1px solid rgba(255,255,255,.2);
-      border-radius:24px;
-      padding:28px;
-      margin-bottom:22px;
-      box-shadow:0 14px 34px rgba(0,0,0,.18);
-    }
+body{
+margin:0;
+font-family:Arial,sans-serif;
+color:#fff;
+background:linear-gradient(135deg,var(--pyur-blue) 0%,var(--pyur-blue-2) 55%,var(--pyur-cyan) 100%);
+}
 
-    .hero:after{
-      content:"";
-      position:absolute;
-      right:-40px;
-      bottom:-40px;
-      width:220px;
-      height:220px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(156,207,16,.35) 0%, rgba(156,207,16,.06) 65%, transparent 72%);
-      pointer-events:none;
-    }
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
 
-    .badge{
-      display:inline-block;
-      background:var(--pyur-pink);
-      color:#fff;
-      font-size:13px;
-      font-weight:700;
-      padding:8px 14px;
-      border-radius:999px;
-      margin-bottom:14px;
-    }
+.hero{
+background:rgba(255,255,255,0.1);
+border-radius:20px;
+padding:25px;
+margin-bottom:20px;
+}
 
-    h1{
-      margin:0 0 10px;
-      font-size:34px;
-      line-height:1.15;
-    }
+.badge{
+background:var(--pyur-pink);
+padding:6px 14px;
+border-radius:20px;
+font-size:13px;
+display:inline-block;
+margin-bottom:10px;
+}
 
-    .subtitle{
-      color:#e8f1ff;
-      font-size:17px;
-      max-width:980px;
-    }
+h1{margin:0}
 
-    .top-grid,
-    .result-grid,
-    .meta-grid,
-    .mini-grid,
-    .btn-grid,
-    .summary-strip{
-      display:grid;
-      gap:18px;
-    }
+.top-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
 
-    .top-grid{
-      grid-template-columns:1fr 1.15fr;
-      margin-bottom:22px;
-    }
+.card{
+background:#fff;
+color:var(--pyur-text);
+border-radius:20px;
+padding:20px;
+}
 
-    .mini-grid{
-      grid-template-columns:1fr 1fr;
-    }
+.card h2{
+margin-top:0;
+color:var(--pyur-blue);
+}
 
-    .btn-grid{
-      grid-template-columns:repeat(2,1fr);
-    }
+.field{
+margin-bottom:15px;
+}
 
-    .result-grid{
-      grid-template-columns:repeat(5,1fr);
-    }
+.field label{
+font-weight:700;
+display:block;
+margin-bottom:6px;
+}
 
-    .meta-grid{
-      grid-template-columns:repeat(4,1fr);
-    }
+.field input{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
 
-    .summary-strip{
-      grid-template-columns:repeat(3,1fr);
-      margin-top:20px;
-    }
+.btn-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:15px;
+}
 
-    .card{
-      background:#fff;
-      color:var(--pyur-text);
-      border-radius:22px;
-      padding:22px;
-      box-shadow:0 12px 28px rgba(0,0,0,.16);
-    }
+.tarif-btn{
+border:none;
+border-radius:14px;
+padding:16px;
+background:#f4f7fb;
+cursor:pointer;
+border:2px solid #e1e8f2;
+}
 
-    .card h2{
-      margin:0 0 18px;
-      font-size:26px;
-      color:var(--pyur-blue);
-    }
+.tarif-btn.active{
+background:linear-gradient(135deg,var(--pyur-blue),var(--pyur-blue-2));
+color:#fff;
+}
 
-    .field{margin-bottom:15px}
+.tarif-btn .name{
+font-weight:700;
+display:block;
+font-size:18px;
+}
 
-    .field label{
-      display:block;
-      font-weight:700;
-      margin-bottom:8px;
-      font-size:15px;
-    }
+.tarif-btn .price{
+font-weight:700;
+font-size:20px;
+margin-top:6px;
+}
 
-    .field input,
-    .field select{
-      width:100%;
-      padding:14px 14px;
-      border-radius:12px;
-      border:2px solid var(--pyur-border);
-      font-size:15px;
-      outline:none;
-      background:#fff;
-      color:var(--pyur-text);
-    }
+.result-grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:15px;
+margin-top:20px;
+}
 
-    .field input:focus,
-    .field select:focus{
-      border-color:var(--pyur-pink);
-    }
+.result-box{
+background:var(--pyur-light);
+color:var(--pyur-text);
+border-radius:15px;
+padding:18px;
+}
 
-    .checkbox-row{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin:8px 0 15px;
-      font-weight:700;
-      color:var(--pyur-text);
-    }
+.result-title{
+font-size:12px;
+font-weight:700;
+margin-bottom:6px;
+}
 
-    .checkbox-row input[type="checkbox"]{
-      width:18px;
-      height:18px;
-      accent-color:var(--pyur-pink);
-    }
+.result-value{
+font-size:24px;
+font-weight:700;
+}
 
-    .section-note{
-      font-size:13px;
-      color:#60708d;
-      margin-bottom:14px;
-      line-height:1.45;
-    }
+.good{color:var(--good)}
+.bad{color:var(--bad)}
+.neutral{color:var(--neutral)}
 
-    .group-title{
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:.4px;
-      color:#6d7d98;
-      font-weight:700;
-      margin:18px 0 10px;
-    }
-
-    .tarif-btn{
-      width:100%;
-      text-align:left;
-      border:none;
-      border-radius:18px;
-      padding:16px 16px;
-      background:#f4f7fb;
-      color:var(--pyur-text);
-      border:2px solid #e1e8f2;
-      cursor:pointer;
-      transition:.18s ease;
-      font:inherit;
-    }
-
-    .tarif-btn:active{
-      transform:scale(.99);
-    }
-
-    .tarif-btn.active{
-      background:linear-gradient(135deg,var(--pyur-blue),var(--pyur-blue-2));
-      color:#fff;
-      border-color:var(--pyur-green);
-      box-shadow:0 10px 24px rgba(36,60,143,.25);
-    }
-
-    .tarif-btn .name{
-      display:block;
-      font-size:18px;
-      font-weight:700;
-      margin-bottom:4px;
-    }
-
-    .tarif-btn .sub{
-      display:block;
-      font-size:13px;
-      opacity:.92;
-      line-height:1.35;
-    }
-
-    .tarif-btn .price{
-      display:block;
-      margin-top:8px;
-      font-size:20px;
-      font-weight:700;
-    }
-
-    .tarif-box{
-      margin-top:16px;
-      background:linear-gradient(180deg,#f8fbff,#f1f7ff);
-      border:1px solid #deebfb;
-      border-radius:18px;
-      padding:18px;
-    }
-
-    .tarif-name{
-      font-size:26px;
-      font-weight:700;
-      color:var(--pyur-blue);
-      margin-bottom:8px;
-    }
-
-    .tarif-desc{
-      color:#415372;
-      margin-bottom:14px;
-    }
-
-    .meta-card{
-      background:#fff;
-      border:1px solid #e2e9f4;
-      border-radius:15px;
-      padding:14px;
-    }
-
-    .meta-label{
-      font-size:12px;
-      text-transform:uppercase;
-      font-weight:700;
-      color:#71819b;
-      margin-bottom:8px;
-    }
-
-    .meta-value{
-      font-size:20px;
-      font-weight:700;
-      color:var(--pyur-text);
-    }
-
-    .argument-box{
-      margin-top:16px;
-      background:linear-gradient(135deg,#fff6ea,#fff1e2);
-      border:1px solid #ffd5ad;
-      border-radius:18px;
-      padding:18px;
-    }
-
-    .argument-box h3{
-      margin:0 0 12px;
-      color:#b65b00;
-      font-size:20px;
-    }
-
-    .argument-box ul{
-      margin:0;
-      padding-left:18px;
-      color:#6a431a;
-    }
-
-    .argument-box li{
-      margin-bottom:8px;
-    }
-
-    .pitch-box{
-      margin-top:16px;
-      background:linear-gradient(135deg,#eef8ff,#f7fbff);
-      border:1px solid #cfe6f7;
-      border-radius:18px;
-      padding:18px;
-    }
-
-    .pitch-box h3{
-      margin:0 0 12px;
-      color:var(--pyur-blue);
-      font-size:20px;
-    }
-
-    .pitch-box p{
-      margin:0;
-      color:#3f5678;
-      line-height:1.6;
-      font-size:15px;
-    }
-
-    .result-box{
-      background:var(--pyur-light);
-      border:1px solid #e1e8f2;
-      border-radius:18px;
-      padding:20px;
-    }
-
-    .result-title{
-      font-size:13px;
-      text-transform:uppercase;
-      font-weight:700;
-      color:#687893;
-      margin-bottom:10px;
-      letter-spacing:.4px;
-    }
-
-    .result-value{
-      font-size:28px;
-      font-weight:700;
-      line-height:1.1;
-      color:var(--pyur-text);
-    }
-
-    .result-sub{
-      margin-top:8px;
-      color:#5d6d88;
-      font-size:14px;
-    }
-
-    .good{color:var(--good)!important}
-    .bad{color:var(--bad)!important}
-    .neutral{color:var(--neutral)!important}
-
-    .summary-tile{
-      border-radius:18px;
-      padding:18px;
-      color:#fff;
-    }
-
-    .summary-tile.blue{background:linear-gradient(135deg,var(--pyur-blue),var(--pyur-blue-2))}
-    .summary-tile.green{background:linear-gradient(135deg,#6cab00,var(--pyur-green))}
-    .summary-tile.pink{background:linear-gradient(135deg,#cf1d53,var(--pyur-pink))}
-
-    .summary-tile .kicker{
-      font-size:12px;
-      opacity:.9;
-      text-transform:uppercase;
-      font-weight:700;
-      margin-bottom:8px;
-    }
-
-    .summary-tile .big{
-      font-size:28px;
-      font-weight:700;
-      line-height:1.05;
-    }
-
-    .foot-note{
-      margin-top:22px;
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.16);
-      color:#edf4ff;
-      border-radius:18px;
-      padding:18px;
-      line-height:1.5;
-    }
-
-    @media (max-width:1100px){
-      .top-grid,
-      .result-grid,
-      .meta-grid,
-      .summary-strip,
-      .mini-grid,
-      .btn-grid{
-        grid-template-columns:1fr;
-      }
-
-      h1{font-size:28px}
-      .result-value{font-size:24px}
-      .summary-tile .big{font-size:24px}
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <div class="container">
 
-    <div class="hero">
-      <div class="badge">PŸUR Tarifvergleich / Wechselberatung</div>
-      <h1>Aktuelle Kosten mit dem passenden PŸUR Wechseltarif vergleichen</h1>
-      <div class="subtitle">
-        Aktuellen Stand eintragen, passenden Wechseltarif antippen und direkt die monatlichen, jährlichen und 24-Monats-Unterschiede sehen.
-      </div>
-    </div>
+<div class="container">
 
-    <div class="top-grid">
-      <div class="card">
-        <h2>Ist-Zustand beim Kunden</h2>
+<div class="hero">
+<div class="badge">PŸUR Tarifvergleich</div>
+<h1>Kostenvergleich</h1>
+</div>
 
-        <div class="field">
-          <label for="anbieter">Aktueller Anbieter</label>
-          <input type="text" id="anbieter" placeholder="z. B. Telekom, Vodafone, o2, 1&1" oninput="berechnen()">
-        </div>
+<div class="top-grid">
 
-        <div class="mini-grid">
-          <div class="field">
-            <label for="internetPreis">Internetpreis aktuell (€ / Monat)</label>
-            <input type="number" id="internetPreis" step="0.01" placeholder="z. B. 44.99" oninput="berechnen()">
-          </div>
+<div class="card">
+<h2>Ist-Zustand</h2>
 
-          <div class="field">
-            <label for="routerPreis">Router / Hardware aktuell (€ / Monat)</label>
-            <input type="number" id="routerPreis" step="0.01" placeholder="z. B. 4.99" oninput="berechnen()">
-          </div>
-        </div>
+<div class="field">
+<label>Anbieter</label>
+<input id="anbieter" oninput="berechnen()">
+</div>
 
-        <div class="mini-grid">
-          <div class="field">
-            <label for="sonstigePreis">Sonstige Kosten aktuell (€ / Monat)</label>
-            <input type="number" id="sonstigePreis" step="0.01" placeholder="z. B. 0.00" oninput="berechnen()">
-          </div>
+<div class="field">
+<label>Internetpreis (€)</label>
+<input id="internetPreis" type="number" oninput="berechnen()">
+</div>
 
-          <div class="field">
-            <label for="altGeschwindigkeit">Aktuelle Geschwindigkeit</label>
-            <input type="text" id="altGeschwindigkeit" placeholder="z. B. 50 Mbit/s DSL" oninput="berechnen()">
-          </div>
-        </div>
+<div class="field">
+<label>Router (€)</label>
+<input id="routerPreis" type="number" oninput="berechnen()">
+</div>
 
-        <div class="checkbox-row">
-          <input type="checkbox" id="tvAltAktiv" onchange="toggleTvAlt(); berechnen();">
-          <label for="tvAltAktiv" style="margin:0;">TV läuft aktuell mit / soll mitgerechnet werden</label>
-        </div>
+<div class="field">
+<label>Sonstige Kosten (€)</label>
+<input id="sonstigePreis" type="number" oninput="berechnen()">
+</div>
 
-        <div id="tvAltWrap" style="display:none;">
-          <div class="mini-grid">
-            <div class="field">
-              <label for="tvAltPreis">TV aktuell (€ / Monat)</label>
-              <input type="number" id="tvAltPreis" step="0.01" placeholder="z. B. 5.00" oninput="berechnen()">
-            </div>
+<div class="field">
+<label>Geschwindigkeit</label>
+<input id="altGeschwindigkeit" oninput="berechnen()">
+</div>
 
-            <div class="field">
-              <label for="tvAltName">TV aktuell</label>
-              <input type="text" id="tvAltName" placeholder="z. B. Kabel TV" oninput="berechnen()">
-            </div>
-          </div>
-        </div>
+</div>
 
-        <div class="field">
-          <label for="notiz">Notiz / aktueller Tarif</label>
-          <input type="text" id="notiz" placeholder="z. B. DSL-Vertrag, Router-Miete, TV optional" oninput="berechnen()">
-        </div>
-      </div>
+<div class="card">
+<h2>Tarif auswählen</h2>
 
-      <div class="card">
-        <h2>Neuen PŸUR Wechseltarif auswählen</h2>
-        <div class="section-note">
-          Fokus auf die gängigsten Wechsler-Produkte. Der Wechselgrund ist sachlich so formuliert, dass er auf Netzmodernisierung und Umstellung auf die vorhandene Multimedia-Dose / Koax-Infrastruktur abstellt. Die Bundesnetzagentur beschreibt dafür einen schrittweisen Technologiewechsel von Kupfer auf zukunftsfähige Netze; einen bundesweiten DSL-Abschalttermin nennt sie nicht.  [oai_citation:2‡Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/GlasfaserStattKupfer/start.html?utm_source=chatgpt.com)
-        </div>
+<div class="btn-grid">
 
-        <div class="group-title">Wechsler-Produkte</div>
-        <div class="btn-grid">
-          <button class="tarif-btn active" data-tarif="kombi500tv" onclick="selectTarif('kombi500tv')">
-            <span class="name">Kombi 500 PŸUR TV Wechsler</span>
-            <span class="sub">500 Mbit/s · TV inklusive</span>
-            <span class="price">44,99 €</span>
-          </button>
+<button class="tarif-btn active" data-tarif="kombi500tv" onclick="selectTarif('kombi500tv')">
+<span class="name">Kombi 500 PYUR TV Wechsler</span>
+<span class="price">44,99 €</span>
+</button>
 
-          <button class="tarif-btn" data-tarif="kombi1000tv" onclick="selectTarif('kombi1000tv')">
-            <span class="name">Kombi 1000 PŸUR TV Wechsler</span>
-            <span class="sub">1000 Mbit/s · TV inklusive</span>
-            <span class="price">49,99 €</span>
-          </button>
+<button class="tarif-btn" data-tarif="kombi1000tv" onclick="selectTarif('kombi1000tv')">
+<span class="name">Kombi 1000 PYUR TV Wechsler</span>
+<span class="price">49,99 €</span>
+</button>
 
-          <button class="tarif-btn" data-tarif="kabeltv" onclick="selectTarif('kabeltv')">
-            <span class="name">Kabel.TV</span>
-            <span class="sub">TV-Grundprodukt</span>
-            <span class="price">5,00 €</span>
-          </button>
+</div>
 
-          <button class="tarif-btn" data-tarif="ue60" onclick="selectTarif('ue60')">
-            <span class="name">Surf &amp; Phone 50 Ü60</span>
-            <span class="sub">50 Mbit/s · für ältere Kunden</span>
-            <span class="price">28,00 €</span>
-          </button>
-        </div>
+</div>
 
-        <div class="tarif-box">
-          <div class="tarif-name" id="tarifName">Kombi 500 PŸUR TV Wechsler</div>
-          <div class="tarif-desc" id="tarifBeschreibung">Tarifdetails erscheinen hier automatisch.</div>
+</div>
 
-          <div class="meta-grid">
-            <div class="meta-card">
-              <div class="meta-label">Monatspreis</div>
-              <div class="meta-value" id="tarifPreis">44,99 €</div>
-            </div>
-            <div class="meta-card">
-              <div class="meta-label">Download</div>
-              <div class="meta-value" id="tarifDownload">500 Mbit/s</div>
-            </div>
-            <div class="meta-card">
-              <div class="meta-label">Upload</div>
-              <div class="meta-value" id="tarifUpload">50 Mbit/s</div>
-            </div>
-            <div class="meta-card">
-              <div class="meta-label">Tarifart</div>
-              <div class="meta-value" id="tarifArt">Wechseltarif</div>
-            </div>
-          </div>
-        </div>
+<div class="card">
 
-        <div class="argument-box">
-          <h3>Vorteile auf einen Blick</h3>
-          <ul id="argumenteListe"></ul>
-        </div>
+<h2>Vergleich</h2>
 
-        <div class="pitch-box">
-          <h3>Wechselgrund / Gesprächsleitfaden</h3>
-          <p id="pitchText">
-            Wir stellen den Anschluss auf die im Gebäude vorhandene Multimedia-Dose um. Das ist für viele Haushalte der sinnvollere Weg, weil die Versorgung damit direkt über die vorhandene Hausinfrastruktur läuft. Gleichzeitig entwickelt sich der Markt weg von klassischen Kupfer-/DSL-Lösungen hin zu moderneren Netzen. Wer heute sauber auf die Grundversorgung im Gebäude umstellt, hat oft eine planbarere und leistungsstärkere Lösung für Internet und TV.  [oai_citation:3‡Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/GlasfaserStattKupfer/start.html?utm_source=chatgpt.com)
-          </p>
-        </div>
-      </div>
-    </div>
+<div class="result-grid">
 
-    <div class="card">
-      <h2>Kostenvergleich</h2>
+<div class="result-box">
+<div class="result-title">Aktuell</div>
+<div class="result-value" id="aktuellGesamt">0 €</div>
+</div>
 
-      <div class="result-grid">
-        <div class="result-box">
-          <div class="result-title">Aktuell pro Monat</div>
-          <div class="result-value" id="aktuellGesamt">0,00 €</div>
-          <div class="result-sub" id="aktuellInfo">Aktuelle monatliche Gesamtkosten</div>
-        </div>
+<div class="result-box">
+<div class="result-title">PYUR</div>
+<div class="result-value" id="neuGesamt">0 €</div>
+</div>
 
-        <div class="result-box">
-          <div class="result-title">Neu mit PŸUR</div>
-          <div class="result-value" id="neuGesamt">0,00 €</div>
-          <div class="result-sub" id="neuInfo">Neuer monatlicher Gesamtpreis</div>
-        </div>
+<div class="result-box">
+<div class="result-title">Monat</div>
+<div class="result-value neutral" id="differenzMonat">0 €</div>
+</div>
 
-        <div class="result-box">
-          <div class="result-title">Monatlicher Unterschied</div>
-          <div class="result-value neutral" id="differenzMonat">0,00 €</div>
-          <div class="result-sub" id="differenzMonatInfo">Vergleich alt vs. neu</div>
-        </div>
+<div class="result-box">
+<div class="result-title">Jahr</div>
+<div class="result-value neutral" id="differenzJahr">0 €</div>
+</div>
 
-        <div class="result-box">
-          <div class="result-title">Jährlicher Unterschied</div>
-          <div class="result-value neutral" id="differenzJahr">0,00 €</div>
-          <div class="result-sub" id="differenzJahrInfo">Hochgerechnet auf 12 Monate</div>
-        </div>
+<div class="result-box">
+<div class="result-title">24 Monate</div>
+<div class="result-value neutral" id="differenz24">0 €</div>
+</div>
 
-        <div class="result-box">
-          <div class="result-title">24 Monate Unterschied</div>
-          <div class="result-value neutral" id="differenz24">0,00 €</div>
-          <div class="result-sub" id="differenz24Info">Vertragslaufzeit 24 Monate</div>
-        </div>
-      </div>
+</div>
 
-      <div class="summary-strip">
-        <div class="summary-tile blue">
-          <div class="kicker">Aktueller Anbieter</div>
-          <div class="big" id="summaryAlt">–</div>
-        </div>
-        <div class="summary-tile green">
-          <div class="kicker">Neuer Tarif</div>
-          <div class="big" id="summaryNeu">–</div>
-        </div>
-        <div class="summary-tile pink">
-          <div class="kicker">Geschwindigkeitsvergleich</div>
-          <div class="big" id="summarySpeed">–</div>
-        </div>
-      </div>
-    </div>
+</div>
 
-    <div class="foot-note">
-      Diese Version nutzt nur deine genannten Hauptprodukte. Den Wechseltext habe ich so angepasst, dass er stark verkauft, aber keine pauschal falsche Behauptung zu einem festen DSL-Abschalttermin enthält. Offiziell geht es um einen schrittweisen Technologiewechsel.  [oai_citation:4‡Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/GlasfaserStattKupfer/start.html?utm_source=chatgpt.com)
-    </div>
-  </div>
+</div>
 
-  <script>
-    let selectedTarif = "kombi500tv";
+<script>
 
-    const tarife = {
-      kombi500tv: {
-        name: "Kombi 500 PŸUR TV Wechsler",
-        preis: 44.99,
-        download: 500,
-        upload: 50,
-        art: "Wechseltarif",
-        beschreibung: "Starker Wechseltarif mit PŸUR TV für Haushalte mit höherem Bedarf.",
-        argumente: [
-          "Internet und TV in einer übersichtlichen Lösung.",
-          "Hohe Bandbreite für Streaming, Homeoffice und viele Geräte.",
-          "Sinnvoll für Haushalte, die direkt auf eine starke Komplettlösung wechseln möchten.",
-          "Passt gut, wenn bereits TV-Nutzung eine Rolle spielt."
-        ],
-        pitch: "Wir ziehen den Anschluss auf die vorhandene Multimedia-Dose im Gebäude. Damit läuft die Versorgung direkt über die hausinterne Kabel-/Koax-Infrastruktur. Das ist oft der sauberere Weg, wenn man Internet und TV gebündelt auf einer modernen Grundversorgung abbilden möchte."
-      },
-      kombi1000tv: {
-        name: "Kombi 1000 PŸUR TV Wechsler",
-        preis: 49.99,
-        download: 1000,
-        upload: 50,
-        art: "Wechseltarif",
-        beschreibung: "Premium-Wechseltarif mit PŸUR TV und maximaler Geschwindigkeit.",
-        argumente: [
-          "Sehr hohe Geschwindigkeit für anspruchsvolle Haushalte.",
-          "TV bereits im Produkt enthalten.",
-          "Große Leistungsreserve für viele Geräte gleichzeitig.",
-          "Stark für Kunden, die direkt auf die größte Lösung gehen möchten."
-        ],
-        pitch: "Die Umstellung auf die Multimedia-Dose bringt den Kunden auf die im Gebäude vorhandene Grundversorgung. Gerade bei höherem Nutzungsanspruch ist das ein sinnvoller Schritt, um den Anschluss zukunftsorientiert und leistungsstark aufzustellen."
-      },
-      kabeltv: {
-        name: "Kabel.TV",
-        preis: 5.00,
-        download: 0,
-        upload: 0,
-        art: "TV Produkt",
-        beschreibung: "TV-Grundprodukt über den vorhandenen Kabelanschluss.",
-        argumente: [
-          "Einfaches TV-Produkt für die Grundversorgung.",
-          "Sinnvoll, wenn beim Kunden vor allem TV im Fokus steht.",
-          "Übersichtliche monatliche Kosten.",
-          "Kann gut als Einstieg oder Ergänzung genutzt werden."
-        ],
-        pitch: "Wenn im Gebäude bereits die Multimedia-Dose vorhanden ist, lässt sich TV darüber direkt sauber abbilden. Für viele Kunden ist das die einfachste und nachvollziehbarste Lösung für die TV-Grundversorgung."
-      },
-      ue60: {
-        name: "Surf & Phone 50 Ü60",
-        preis: 28.00,
-        download: 50,
-        upload: 5,
-        art: "Wechseltarif Ü60",
-        beschreibung: "Gängiger Tarif für ältere Kunden mit Internet und Telefonie.",
-        argumente: [
-          "Übersichtlicher Tarif für alltägliche Nutzung.",
-          "Gut geeignet für ältere Kunden, die es einfach und planbar möchten.",
-          "Telefonie und Internet klar strukturiert.",
-          "Passt gut, wenn keine extrem hohe Geschwindigkeit gebraucht wird."
-        ],
-        pitch: "Gerade für ältere Kunden ist eine einfache, stabile und gut verständliche Lösung wichtig. Über die vorhandene Multimedia-Dose lässt sich der Anschluss häufig unkompliziert auf eine planbare Versorgung umstellen."
-      }
-    };
+let selectedTarif="kombi500tv"
 
-    function euro(wert) {
-      return wert.toLocaleString("de-DE", { style: "currency", currency: "EUR" });
-    }
+const tarife={
+kombi500tv:{name:"Kombi 500 PYUR TV Wechsler",preis:44.99},
+kombi1000tv:{name:"Kombi 1000 PYUR TV Wechsler",preis:49.99}
+}
 
-    function num(id) {
-      const val = parseFloat(document.getElementById(id).value);
-      return isNaN(val) ? 0 : val;
-    }
+function euro(x){
+return x.toLocaleString("de-DE",{style:"currency",currency:"EUR"})
+}
 
-    function toggleTvAlt() {
-      document.getElementById("tvAltWrap").style.display =
-        document.getElementById("tvAltAktiv").checked ? "block" : "none";
-    }
+function num(id){
+let v=parseFloat(document.getElementById(id).value)
+return isNaN(v)?0:v
+}
 
-    function setArgumente(arr) {
-      const list = document.getElementById("argumenteListe");
-      list.innerHTML = "";
-      arr.forEach(text => {
-        const li = document.createElement("li");
-        li.textContent = text;
-        list.appendChild(li);
-      });
-    }
+function selectTarif(t){
+selectedTarif=t
 
-    function selectTarif(key) {
-      selectedTarif = key;
-      document.querySelectorAll(".tarif-btn").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.tarif === key);
-      });
-      berechnen();
-    }
+document.querySelectorAll(".tarif-btn").forEach(b=>{
+b.classList.remove("active")
+})
 
-    function berechnen() {
-      const anbieter = document.getElementById("anbieter").value || "Aktueller Anbieter";
-      const tarif = tarife[selectedTarif];
+document.querySelector(`[data-tarif=${t}]`).classList.add("active")
 
-      const altInternet = num("internetPreis");
-      const altRouter = num("routerPreis");
-      const altSonstige = num("sonstigePreis");
-      const altTv = document.getElementById("tvAltAktiv").checked ? num("tvAltPreis") : 0;
+berechnen()
+}
 
-      const aktuell = altInternet + altRouter + altSonstige + altTv;
-      const neu = tarif.preis;
+function berechnen(){
 
-      const diffMonat = aktuell - neu;
-      const diffJahr = diffMonat * 12;
-      const diff24 = diffMonat * 24;
+let alt=
+num("internetPreis")+
+num("routerPreis")+
+num("sonstigePreis")
 
-      document.getElementById("tarifName").textContent = tarif.name;
-      document.getElementById("tarifBeschreibung").textContent = tarif.beschreibung;
-      document.getElementById("tarifPreis").textContent = euro(tarif.preis);
-      document.getElementById("tarifDownload").textContent = tarif.download > 0 ? tarif.download + " Mbit/s" : "–";
-      document.getElementById("tarifUpload").textContent = tarif.upload > 0 ? tarif.upload + " Mbit/s" : "–";
-      document.getElementById("tarifArt").textContent = tarif.art;
-      document.getElementById("pitchText").textContent = tarif.pitch;
-      setArgumente(tarif.argumente);
+let neu=tarife[selectedTarif].preis
 
-      document.getElementById("aktuellGesamt").textContent = euro(aktuell);
-      document.getElementById("neuGesamt").textContent = euro(neu);
+let diff=alt-neu
+let jahr=diff*12
+let m24=diff*24
 
-      document.getElementById("aktuellInfo").textContent = "Aktuelle monatliche Gesamtkosten bei " + anbieter;
-      document.getElementById("neuInfo").textContent = "Neuer monatlicher Gesamtpreis mit " + tarif.name;
+document.getElementById("aktuellGesamt").innerText=euro(alt)
+document.getElementById("neuGesamt").innerText=euro(neu)
 
-      const monatEl = document.getElementById("differenzMonat");
-      const jahrEl = document.getElementById("differenzJahr");
-      const d24El = document.getElementById("differenz24");
+let m=document.getElementById("differenzMonat")
+let j=document.getElementById("differenzJahr")
+let z=document.getElementById("differenz24")
 
-      const monatInfo = document.getElementById("differenzMonatInfo");
-      const jahrInfo = document.getElementById("differenzJahrInfo");
-      const d24Info = document.getElementById("differenz24Info");
+m.innerText=euro(diff)
+j.innerText=euro(jahr)
+z.innerText=euro(m24)
 
-      monatEl.className = "result-value neutral";
-      jahrEl.className = "result-value neutral";
-      d24El.className = "result-value neutral";
+m.className="result-value "+(diff>0?"good":diff<0?"bad":"neutral")
+j.className="result-value "+(jahr>0?"good":jahr<0?"bad":"neutral")
+z.className="result-value "+(m24>0?"good":m24<0?"bad":"neutral")
 
-      if (diffMonat > 0) {
-        monatEl.textContent = euro(diffMonat) + " weniger";
-        jahrEl.textContent = euro(diffJahr) + " pro Jahr";
-        d24El.textContent = euro(diff24) + " in 24 Mon.";
-        monatEl.className = "result-value good";
-        jahrEl.className = "result-value good";
-        d24El.className = "result-value good";
-        monatInfo.textContent = "Neuer Tarif ist monatlich günstiger";
-        jahrInfo.textContent = "Jährliche Ersparnis";
-        d24Info.textContent = "Ersparnis über 24 Monate";
-      } else if (diffMonat < 0) {
-        monatEl.textContent = euro(Math.abs(diffMonat)) + " mehr";
-        jahrEl.textContent = euro(Math.abs(diffJahr)) + " pro Jahr";
-        d24El.textContent = euro(Math.abs(diff24)) + " in 24 Mon.";
-        monatEl.className = "result-value bad";
-        jahrEl.className = "result-value bad";
-        d24El.className = "result-value bad";
-        monatInfo.textContent = "Neuer Tarif ist monatlich teurer";
-        jahrInfo.textContent = "Mehrpreis pro Jahr";
-        d24Info.textContent = "Mehrpreis über 24 Monate";
-      } else {
-        monatEl.textContent = "0,00 € gleich";
-        jahrEl.textContent = "0,00 € gleich";
-        d24El.textContent = "0,00 € gleich";
-        monatInfo.textContent = "Beide Varianten liegen gleich";
-        jahrInfo.textContent = "Kein Unterschied";
-        d24Info.textContent = "Kein Unterschied über 24 Monate";
-      }
+}
 
-      const altSpeed = document.getElementById("altGeschwindigkeit").value || "unbekannt";
-      document.getElementById("summaryAlt").textContent = anbieter;
-      document.getElementById("summaryNeu").textContent = tarif.name;
-      document.getElementById("summarySpeed").textContent =
-        tarif.download > 0 ? altSpeed + " → " + tarif.download + " Mbit/s" : altSpeed + " → TV";
-    }
+berechnen()
 
-    toggleTvAlt();
-    selectTarif("kombi500tv");
-  </script>
+</script>
+
 </body>
 </html>
